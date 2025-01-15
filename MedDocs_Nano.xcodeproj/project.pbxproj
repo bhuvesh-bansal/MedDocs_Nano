@@ -6,6 +6,10 @@
 	objectVersion = 77;
 	objects = {
 
+/* Begin PBXBuildFile section */
+		CFC239E22D37D83A0002335D /* .gitignore in Resources */ = {isa = PBXBuildFile; fileRef = CFC239D62D37D83A0002335D /* .gitignore */; };
+/* End PBXBuildFile section */
+
 /* Begin PBXContainerItemProxy section */
 		CFE71A2A2D37B1A600FDD5D0 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -24,6 +28,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		CFC239D62D37D83A0002335D /* .gitignore */ = {isa = PBXFileReference; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
 		CFE71A132D37B1A600FDD5D0 /* MedDocs_Nano.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MedDocs_Nano.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CFE71A292D37B1A600FDD5D0 /* MedDocs_NanoTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MedDocs_NanoTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		CFE71A332D37B1A600FDD5D0 /* MedDocs_NanoUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MedDocs_NanoUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -92,6 +97,7 @@
 				CFE71A2C2D37B1A600FDD5D0 /* MedDocs_NanoTests */,
 				CFE71A362D37B1A600FDD5D0 /* MedDocs_NanoUITests */,
 				CFE71A142D37B1A600FDD5D0 /* Products */,
+				CFC239D62D37D83A0002335D /* .gitignore */,
 			);
 			sourceTree = "<group>";
 		};
@@ -225,6 +231,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CFC239E22D37D83A0002335D /* .gitignore in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

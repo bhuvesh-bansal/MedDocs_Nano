@@ -31,7 +31,7 @@
         <!--Reports-->
         <scene sceneID="s0d-6b-0kx">
             <objects>
-                <viewController id="Y6W-OH-hqX" customClass="ReportsViewController" customModule="MedDocs" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="Y6W-OH-hqX" customClass="ReportsViewController" customModule="MedDocs_Nano" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="5EZ-qb-Rvc">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -39,9 +39,6 @@
                             <searchBar contentMode="redraw" placeholder="Search" translatesAutoresizingMaskIntoConstraints="NO" id="thQ-WH-jPU">
                                 <rect key="frame" x="0.0" y="103" width="393" height="56"/>
                                 <textInputTraits key="textInputTraits"/>
-                                <connections>
-                                    <outlet property="delegate" destination="Y6W-OH-hqX" id="3Hh-gj-oOE"/>
-                                </connections>
                             </searchBar>
                             <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="FPf-j8-U3y">
                                 <rect key="frame" x="0.0" y="169" width="393" height="32"/>
@@ -49,9 +46,6 @@
                                     <segment title="Tag"/>
                                     <segment title="Hospital"/>
                                 </segments>
-                                <connections>
-                                    <action selector="segmentedButtonChanged:" destination="Y6W-OH-hqX" eventType="valueChanged" id="h88-PA-kb6"/>
-                                </connections>
                             </segmentedControl>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="irE-NT-bq8">
                                 <rect key="frame" x="0.0" y="200" width="393" height="569"/>
@@ -254,17 +248,6 @@
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="c5F-OB-dlF"/>
                     </navigationItem>
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
-                    <connections>
-                        <outlet property="hospitalDateLabel" destination="bYQ-oW-KcC" id="ctl-ca-hAw"/>
-                        <outlet property="hospitalImageLabel" destination="BQA-MD-sFe" id="8jt-Zc-GTe"/>
-                        <outlet property="hospitalLabel" destination="ZKP-y0-m6f" id="eoh-Bq-2eg"/>
-                        <outlet property="hospitalView" destination="S4a-yd-cKz" id="l1j-mD-FaX"/>
-                        <outlet property="segmentedButton" destination="FPf-j8-U3y" id="Fvr-ya-buH"/>
-                        <outlet property="tagDateLabel" destination="vLr-1m-40N" id="djL-bC-z1y"/>
-                        <outlet property="tagImageView" destination="bRM-r2-eie" id="ENT-HX-0qa"/>
-                        <outlet property="tagNameLabel" destination="Cjw-sn-7fH" id="9gs-gR-EZH"/>
-                        <outlet property="tagView" destination="irE-NT-bq8" id="HsA-Vy-MaJ"/>
-                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ief-a0-LHa" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
