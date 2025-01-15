@@ -1,0 +1,568 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 77;
+	objects = {
+
+/* Begin PBXContainerItemProxy section */
+		CFE71A2A2D37B1A600FDD5D0 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = CFE71A0B2D37B1A600FDD5D0 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = CFE71A122D37B1A600FDD5D0;
+			remoteInfo = MedDocs_Nano;
+		};
+		CFE71A342D37B1A600FDD5D0 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = CFE71A0B2D37B1A600FDD5D0 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = CFE71A122D37B1A600FDD5D0;
+			remoteInfo = MedDocs_Nano;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		CFE71A132D37B1A600FDD5D0 /* MedDocs_Nano.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MedDocs_Nano.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		CFE71A292D37B1A600FDD5D0 /* MedDocs_NanoTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MedDocs_NanoTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		CFE71A332D37B1A600FDD5D0 /* MedDocs_NanoUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MedDocs_NanoUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+/* End PBXFileReference section */
+
+/* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
+		CFE71A3B2D37B1A600FDD5D0 /* Exceptions for "MedDocs_Nano" folder in "MedDocs_Nano" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				Info.plist,
+			);
+			target = CFE71A122D37B1A600FDD5D0 /* MedDocs_Nano */;
+		};
+/* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
+
+/* Begin PBXFileSystemSynchronizedRootGroup section */
+		CFE71A152D37B1A600FDD5D0 /* MedDocs_Nano */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			exceptions = (
+				CFE71A3B2D37B1A600FDD5D0 /* Exceptions for "MedDocs_Nano" folder in "MedDocs_Nano" target */,
+			);
+			path = MedDocs_Nano;
+			sourceTree = "<group>";
+		};
+		CFE71A2C2D37B1A600FDD5D0 /* MedDocs_NanoTests */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = MedDocs_NanoTests;
+			sourceTree = "<group>";
+		};
+		CFE71A362D37B1A600FDD5D0 /* MedDocs_NanoUITests */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = MedDocs_NanoUITests;
+			sourceTree = "<group>";
+		};
+/* End PBXFileSystemSynchronizedRootGroup section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		CFE71A102D37B1A600FDD5D0 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		CFE71A262D37B1A600FDD5D0 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		CFE71A302D37B1A600FDD5D0 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		CFE71A0A2D37B1A600FDD5D0 = {
+			isa = PBXGroup;
+			children = (
+				CFE71A152D37B1A600FDD5D0 /* MedDocs_Nano */,
+				CFE71A2C2D37B1A600FDD5D0 /* MedDocs_NanoTests */,
+				CFE71A362D37B1A600FDD5D0 /* MedDocs_NanoUITests */,
+				CFE71A142D37B1A600FDD5D0 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		CFE71A142D37B1A600FDD5D0 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				CFE71A132D37B1A600FDD5D0 /* MedDocs_Nano.app */,
+				CFE71A292D37B1A600FDD5D0 /* MedDocs_NanoTests.xctest */,
+				CFE71A332D37B1A600FDD5D0 /* MedDocs_NanoUITests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		CFE71A122D37B1A600FDD5D0 /* MedDocs_Nano */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = CFE71A3C2D37B1A600FDD5D0 /* Build configuration list for PBXNativeTarget "MedDocs_Nano" */;
+			buildPhases = (
+				CFE71A0F2D37B1A600FDD5D0 /* Sources */,
+				CFE71A102D37B1A600FDD5D0 /* Frameworks */,
+				CFE71A112D37B1A600FDD5D0 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			fileSystemSynchronizedGroups = (
+				CFE71A152D37B1A600FDD5D0 /* MedDocs_Nano */,
+			);
+			name = MedDocs_Nano;
+			packageProductDependencies = (
+			);
+			productName = MedDocs_Nano;
+			productReference = CFE71A132D37B1A600FDD5D0 /* MedDocs_Nano.app */;
+			productType = "com.apple.product-type.application";
+		};
+		CFE71A282D37B1A600FDD5D0 /* MedDocs_NanoTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = CFE71A412D37B1A600FDD5D0 /* Build configuration list for PBXNativeTarget "MedDocs_NanoTests" */;
+			buildPhases = (
+				CFE71A252D37B1A600FDD5D0 /* Sources */,
+				CFE71A262D37B1A600FDD5D0 /* Frameworks */,
+				CFE71A272D37B1A600FDD5D0 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				CFE71A2B2D37B1A600FDD5D0 /* PBXTargetDependency */,
+			);
+			fileSystemSynchronizedGroups = (
+				CFE71A2C2D37B1A600FDD5D0 /* MedDocs_NanoTests */,
+			);
+			name = MedDocs_NanoTests;
+			packageProductDependencies = (
+			);
+			productName = MedDocs_NanoTests;
+			productReference = CFE71A292D37B1A600FDD5D0 /* MedDocs_NanoTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		CFE71A322D37B1A600FDD5D0 /* MedDocs_NanoUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = CFE71A442D37B1A600FDD5D0 /* Build configuration list for PBXNativeTarget "MedDocs_NanoUITests" */;
+			buildPhases = (
+				CFE71A2F2D37B1A600FDD5D0 /* Sources */,
+				CFE71A302D37B1A600FDD5D0 /* Frameworks */,
+				CFE71A312D37B1A600FDD5D0 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				CFE71A352D37B1A600FDD5D0 /* PBXTargetDependency */,
+			);
+			fileSystemSynchronizedGroups = (
+				CFE71A362D37B1A600FDD5D0 /* MedDocs_NanoUITests */,
+			);
+			name = MedDocs_NanoUITests;
+			packageProductDependencies = (
+			);
+			productName = MedDocs_NanoUITests;
+			productReference = CFE71A332D37B1A600FDD5D0 /* MedDocs_NanoUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		CFE71A0B2D37B1A600FDD5D0 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = 1;
+				LastSwiftUpdateCheck = 1620;
+				LastUpgradeCheck = 1620;
+				TargetAttributes = {
+					CFE71A122D37B1A600FDD5D0 = {
+						CreatedOnToolsVersion = 16.2;
+					};
+					CFE71A282D37B1A600FDD5D0 = {
+						CreatedOnToolsVersion = 16.2;
+						TestTargetID = CFE71A122D37B1A600FDD5D0;
+					};
+					CFE71A322D37B1A600FDD5D0 = {
+						CreatedOnToolsVersion = 16.2;
+						TestTargetID = CFE71A122D37B1A600FDD5D0;
+					};
+				};
+			};
+			buildConfigurationList = CFE71A0E2D37B1A600FDD5D0 /* Build configuration list for PBXProject "MedDocs_Nano" */;
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = CFE71A0A2D37B1A600FDD5D0;
+			minimizedProjectReferenceProxies = 1;
+			preferredProjectObjectVersion = 77;
+			productRefGroup = CFE71A142D37B1A600FDD5D0 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				CFE71A122D37B1A600FDD5D0 /* MedDocs_Nano */,
+				CFE71A282D37B1A600FDD5D0 /* MedDocs_NanoTests */,
+				CFE71A322D37B1A600FDD5D0 /* MedDocs_NanoUITests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		CFE71A112D37B1A600FDD5D0 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		CFE71A272D37B1A600FDD5D0 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		CFE71A312D37B1A600FDD5D0 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		CFE71A0F2D37B1A600FDD5D0 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		CFE71A252D37B1A600FDD5D0 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		CFE71A2F2D37B1A600FDD5D0 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		CFE71A2B2D37B1A600FDD5D0 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = CFE71A122D37B1A600FDD5D0 /* MedDocs_Nano */;
+			targetProxy = CFE71A2A2D37B1A600FDD5D0 /* PBXContainerItemProxy */;
+		};
+		CFE71A352D37B1A600FDD5D0 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = CFE71A122D37B1A600FDD5D0 /* MedDocs_Nano */;
+			targetProxy = CFE71A342D37B1A600FDD5D0 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		CFE71A3D2D37B1A600FDD5D0 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = MedDocs_Nano/Info.plist;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
+				INFOPLIST_KEY_UIMainStoryboardFile = Main;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.nano.in.MedDocs-Nano";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		CFE71A3E2D37B1A600FDD5D0 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = MedDocs_Nano/Info.plist;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
+				INFOPLIST_KEY_UIMainStoryboardFile = Main;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.nano.in.MedDocs-Nano";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		CFE71A3F2D37B1A600FDD5D0 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 18.2;
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG $(inherited)";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		CFE71A402D37B1A600FDD5D0 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 18.2;
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		CFE71A422D37B1A600FDD5D0 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 18.2;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.nano.in.MedDocs-NanoTests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/MedDocs_Nano.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/MedDocs_Nano";
+			};
+			name = Debug;
+		};
+		CFE71A432D37B1A600FDD5D0 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 18.2;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.nano.in.MedDocs-NanoTests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/MedDocs_Nano.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/MedDocs_Nano";
+			};
+			name = Release;
+		};
+		CFE71A452D37B1A600FDD5D0 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.nano.in.MedDocs-NanoUITests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = MedDocs_Nano;
+			};
+			name = Debug;
+		};
+		CFE71A462D37B1A600FDD5D0 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.nano.in.MedDocs-NanoUITests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = MedDocs_Nano;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		CFE71A0E2D37B1A600FDD5D0 /* Build configuration list for PBXProject "MedDocs_Nano" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				CFE71A3F2D37B1A600FDD5D0 /* Debug */,
+				CFE71A402D37B1A600FDD5D0 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		CFE71A3C2D37B1A600FDD5D0 /* Build configuration list for PBXNativeTarget "MedDocs_Nano" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				CFE71A3D2D37B1A600FDD5D0 /* Debug */,
+				CFE71A3E2D37B1A600FDD5D0 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		CFE71A412D37B1A600FDD5D0 /* Build configuration list for PBXNativeTarget "MedDocs_NanoTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				CFE71A422D37B1A600FDD5D0 /* Debug */,
+				CFE71A432D37B1A600FDD5D0 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		CFE71A442D37B1A600FDD5D0 /* Build configuration list for PBXNativeTarget "MedDocs_NanoUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				CFE71A452D37B1A600FDD5D0 /* Debug */,
+				CFE71A462D37B1A600FDD5D0 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = CFE71A0B2D37B1A600FDD5D0 /* Project object */;
+}
