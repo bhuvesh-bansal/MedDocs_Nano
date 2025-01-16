@@ -58,7 +58,12 @@ class ReportsViewController: UIViewController {
         filteredHospitals = hospitals
         filteredTags = tags
         searchBar.delegate = self
+
+        // Ensure "All" is selected by default
+        selectedIndex = IndexPath(item: 0, section: 0)
+        tagSortCollectionView.reloadData()
     }
+
 
     // MARK: UI Configuration
     func configureUI() {
@@ -216,7 +221,7 @@ extension ReportsViewController: UICollectionViewDelegate, UICollectionViewDataS
 // MARK: UIColor Extension
 extension UIColor {
     convenience init(hex: String) {
-        var scanner = Scanner(string: hex)
+        let scanner = Scanner(string: hex)
         scanner.currentIndex = hex.startIndex
         var rgbValue: UInt64 = 0
         scanner.scanHexInt64(&rgbValue)

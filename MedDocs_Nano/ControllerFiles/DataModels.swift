@@ -13,6 +13,7 @@ import UIKit
 
 // MARK: - Gender
 
+
 enum Gender: String, CaseIterable {
     case male = "Male"
     case female = "Female"

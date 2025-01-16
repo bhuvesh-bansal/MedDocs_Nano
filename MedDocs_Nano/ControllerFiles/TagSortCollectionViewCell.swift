@@ -20,7 +20,7 @@ class TagSortCollectionViewCell: UICollectionViewCell {
         } else {
             self.contentView.backgroundColor = .white // Default background color
             self.contentView.layer.borderWidth = 1 // Black border for unselected items
-            self.contentView.layer.borderColor = UIColor.black.cgColor
+            self.contentView.layer.borderColor = UIColor.init(hex: "00AFB9").cgColor
         }
 
         // Corner radius for rounded edges
