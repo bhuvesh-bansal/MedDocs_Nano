@@ -17,7 +17,10 @@ class tagsDetailTableViewCell: UITableViewCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        // Initialization code
+        
+        // Make the image view rounded
+        tagImageView.layer.cornerRadius = tagImageView.frame.size.width / 2
+        tagImageView.clipsToBounds = true
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
