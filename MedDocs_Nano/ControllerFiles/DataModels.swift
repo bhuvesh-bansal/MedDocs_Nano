@@ -46,7 +46,13 @@ enum AllergyType: String, CaseIterable {
     case drug = "Drug"
     case environmental = "Environmental"
     case other = "Other"
+        case peanuts
+        case pollen
+        case gluten
+        case dairy
+
 }
+
 
 enum MedicineType: String, CaseIterable {
     case tablet = "Tablet"

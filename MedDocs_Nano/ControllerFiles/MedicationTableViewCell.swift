@@ -9,6 +9,13 @@ import UIKit
 
 class MedicationTableViewCell: UITableViewCell {
 
+    
+    @IBOutlet weak var medicationImageTextLabel: UILabel!
+    
+    @IBOutlet weak var medicationNameLabel: UILabel!
+    @IBOutlet weak var medicationDosage: UILabel!
+    @IBOutlet weak var medicineTiming: UILabel!
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code

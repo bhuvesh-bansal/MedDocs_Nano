@@ -9,6 +9,12 @@ import UIKit
 
 class hospitalNamesTableViewCell: UITableViewCell {
 
+    @IBOutlet weak var hospitalNameLabel: UILabel!
+    
+    @IBOutlet weak var hospitalNameImageLabel: UILabel!
+    @IBOutlet weak var hospitalDate: UILabel!
+    
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code

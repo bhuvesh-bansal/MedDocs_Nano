@@ -9,6 +9,12 @@ import UIKit
 
 class tagsDetailTableViewCell: UITableViewCell {
 
+    
+    @IBOutlet weak var tagImageView: UIImageView!
+    @IBOutlet weak var tagNameLabel: UILabel!
+    @IBOutlet weak var tagDateLabel: UILabel!
+    
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
