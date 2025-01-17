@@ -1,25 +1,20 @@
 //
 //  DataModels.swift
-//  MedDocs
+//  MedDocs_Nano
 //
-//  Created by student-2 on 10/12/24.
+//  Created by Bhuvesh Bansal on 16/01/25.
+//
 
 import Foundation
-import UIKit
 
 // MARK: - Enums
 
-
-
-// MARK: - Gender
-
-
-enum Gender: String, CaseIterable {
+enum Gender: String, CaseIterable, Codable {
     case male = "Male"
     case female = "Female"
 }
 
-enum BloodType: String, CaseIterable {
+enum BloodType: String, CaseIterable, Codable {
     case aPositive = "A+"
     case aNegative = "A-"
     case bPositive = "B+"
@@ -31,52 +26,56 @@ enum BloodType: String, CaseIterable {
     case unknown = "Unknown"
 }
 
-enum ReportsType: String, CaseIterable {
+enum ReportsType: String, CaseIterable, Codable {
     case pdf = "PDF"
     case jpg = "JPG"
 }
 
-enum AppointmentStatus: String, CaseIterable {
+enum AppointmentStatus: String, CaseIterable, Codable {
     case pending = "Pending"
     case visited = "Visited"
     case skipped = "Skipped"
 }
 
-enum AllergyType: String, CaseIterable {
+enum AllergyType: String, CaseIterable, Codable {
     case food = "Food"
     case drug = "Drug"
     case environmental = "Environmental"
     case other = "Other"
-        case peanuts
-        case pollen
-        case gluten
-        case dairy
-
 }
 
-
-enum MedicineType: String, CaseIterable {
+enum MedicineType: String, CaseIterable, Codable {
     case tablet = "Tablet"
     case capsule = "Capsule"
     case syrup = "Syrup"
 }
 
-enum DosageFrequency: String, CaseIterable {
+enum DosageFrequency: String, CaseIterable, Codable {
     case everyday = "Everyday"
     case everyFewDays = "Every Few Days"
+    // Consider more specific intervals like DAILY, WEEKLY, MONTHLY
 }
 
-struct UserLoginInfo {
+// MARK: - Structs
+
+struct User: Codable {
+    var id: UUID
+    var profile: ProfileInfo
+    var loginInfo: UserLoginInfo
+}
+
+struct UserLoginInfo: Codable {
     var id: UUID
     var email: String
     var password: String
 }
 
-struct ProfileInfo {
+struct ProfileInfo: Codable {
     var id: UUID
     var profileImage: String?
     var email: String
     var firstName: String
+    var middleName: String?
     var lastName: String
     var dob: Date
     var phoneNumber: String
@@ -86,12 +85,12 @@ struct ProfileInfo {
     var address: String?
 }
 
-struct Dosage {
+struct Dosage: Codable {
     var id: UUID
     var time: Date
 }
 
-struct Medication {
+struct Medication: Codable {
     var id: UUID
     var userId: UUID
     var medicineName: String
@@ -100,23 +99,39 @@ struct Medication {
     var notes: String
     var frequency: DosageFrequency
     var interval: Int?
-    var dosageInterval: [Dosage]
+    // Consider a separate DosageSchedule struct for more details
     var startDate: Date
     var endDate: Date?
     var time: Date
 }
 
-struct Appointment {
+struct Appointment: Codable {
     var id: UUID
     var userId: UUID
     var clinicName: String
     var notes: String
-    var time: TimeInterval
+    var time: Date // Changed from TimeInterval
     var date: Date
     var status: AppointmentStatus
 }
 
-struct Reports {
+struct Report: Codable {
+    var id: UUID
+    var userId: UUID
+    var imagePath: String
+    var time: Date // Changed from TimeInterval
+    var date: Date
+}
+
+struct Prescription: Codable {
+    var id: UUID
+    var userId: UUID
+    var imagePath: String
+    var time: Date // Changed from TimeInterval
+    var date: Date
+}
+
+struct Reports: Codable {
     var id: UUID
     var userId: UUID
     var tag: String
@@ -127,72 +142,40 @@ struct Reports {
     var reports: [Report]
 }
 
-struct Prescription {
-    var id: UUID
-    var userId: UUID
-    var imagePath: String
-    var time: TimeInterval
-    var date: Date
-}
-
-struct Report {
-    var id: UUID
-    var userId: UUID
-    var imagePath: String
-    var time: TimeInterval
-    var date: Date
-}
-
 // MARK: - Data Models
 
-
-
-// MARK: - User Data Model
-
 class UserDataModel {
-    private var users: [UserLoginInfo] = []
+    private var users: [User] = []
     static let sharedUserData = UserDataModel()
 
     private init() {}
 
-    func registerUser(email: String, password: String) -> UserLoginInfo {
-        let newUser = UserLoginInfo(id: UUID(), email: email, password: password)
-        users.append(newUser)
-
-        ProfileDataModel.sharedProfileData.addProfile(
-            email: email,
-            firstName: "",
-            lastName: "",
-            DOB: Date(),
-            phoneNumber: "",
-            sex: .male,
-            bloodType: .oPositive,
-            allergies: [],
-            address: nil
+    func registerUser(email: String, password: String, profile: ProfileInfo) -> User {
+        let newUser = User(
+            id: UUID(),
+            profile: profile,
+            loginInfo: UserLoginInfo(id: UUID(), email: email, password: password)
         )
-
+        users.append(newUser)
         return newUser
     }
 
-    func loginUser(email: String, password: String) -> UserLoginInfo? {
-        return users.first { $0.email == email && $0.password == password }
+    func loginUser(email: String, password: String) -> User? {
+        return users.first { $0.loginInfo.email == email && $0.loginInfo.password == password }
     }
 
     func deleteUser(by id: UUID) {
         users.removeAll { $0.id == id }
-        ProfileDataModel.sharedProfileData.deleteProfile(by: id)
     }
 
-    func editUser(id: UUID, email: String?, password: String?) {
+    func editUser(id: UUID, email: String?, password: String?, profile: ProfileInfo?) {
         if let index = users.firstIndex(where: { $0.id == id }) {
-            if let email = email { users[index].email = email }
-            if let password = password { users[index].password = password }
+            if let email = email { users[index].loginInfo.email = email }
+            if let password = password { users[index].loginInfo.password = password }
+            if let profile = profile { users[index].profile = profile }
         }
     }
 }
-
-
-// MARK: - Profile Data Models
 
 class ProfileDataModel {
     private var profiles: [ProfileInfo] = []
@@ -200,12 +183,13 @@ class ProfileDataModel {
 
     private init() {}
 
-    func addProfile(email: String, firstName: String, lastName: String, DOB: Date, phoneNumber: String, sex: Gender, bloodType: BloodType, allergies: [AllergyType], address: String?) {
+    func addProfile(email: String, firstName: String, middleName: String?, lastName: String, DOB: Date, phoneNumber: String, sex: Gender, bloodType: BloodType, allergies: [AllergyType], address: String?) {
         let newProfile = ProfileInfo(
             id: UUID(),
             profileImage: nil,
             email: email,
             firstName: firstName,
+            middleName: middleName,
             lastName: lastName,
             dob: DOB,
             phoneNumber: phoneNumber,
@@ -225,11 +209,12 @@ class ProfileDataModel {
         profiles.removeAll { $0.id == id }
     }
 
-    func editProfile(id: UUID, profileImage: String?, email: String?, firstName: String?, lastName: String?, DOB: Date?, phoneNumber: String?, sex: Gender?, bloodType: BloodType?, allergies: [AllergyType]?, address: String?) {
+    func editProfile(id: UUID, profileImage: String?, email: String?, firstName: String?, middleName: String?, lastName: String?, DOB: Date?, phoneNumber: String?, sex: Gender?, bloodType: BloodType?, allergies: [AllergyType]?, address: String?) {
         if let index = profiles.firstIndex(where: { $0.id == id }) {
             if let profileImage = profileImage { profiles[index].profileImage = profileImage }
             if let email = email { profiles[index].email = email }
             if let firstName = firstName { profiles[index].firstName = firstName }
+            if let middleName = middleName { profiles[index].middleName = middleName }
             if let lastName = lastName { profiles[index].lastName = lastName }
             if let DOB = DOB { profiles[index].dob = DOB }
             if let phoneNumber = phoneNumber { profiles[index].phoneNumber = phoneNumber }
@@ -241,16 +226,13 @@ class ProfileDataModel {
     }
 }
 
-
-// MARK: - Medication Data Models
-
 class MedicationDataModel {
     private var medicationData: [Medication] = []
     static let sharedMedicationData = MedicationDataModel()
 
     private init() {}
 
-    func addMedication(userId: UUID, medicineName: String, dosage: Int, type: MedicineType, notes: String, frequency: DosageFrequency, interval: Int?, dosageInterval: [Dosage], startDate: Date, endDate: Date?, time: Date) -> Medication {
+    func addMedication(userId: UUID, medicineName: String, dosage: Int, type: MedicineType, notes: String, frequency: DosageFrequency, interval: Int?, startDate: Date, endDate: Date?, time: Date) -> Medication {
         let newMedication = Medication(
             id: UUID(),
             userId: userId,
@@ -260,7 +242,6 @@ class MedicationDataModel {
             notes: notes,
             frequency: frequency,
             interval: interval,
-            dosageInterval: dosageInterval,
             startDate: startDate,
             endDate: endDate,
             time: time
@@ -277,7 +258,7 @@ class MedicationDataModel {
         medicationData.removeAll { $0.id == id }
     }
 
-    func editMedication(id: UUID, medicineName: String?, dosage: Int?, type: MedicineType?, notes: String?, frequency: DosageFrequency?, interval: Int?, dosageInterval: [Dosage]?, startDate: Date?, endDate: Date?, time: Date?) {
+    func editMedication(id: UUID, medicineName: String?, dosage: Int?, type: MedicineType?, notes: String?, frequency: DosageFrequency?, interval: Int?, startDate: Date?, endDate: Date?, time: Date?) {
         if let index = medicationData.firstIndex(where: { $0.id == id }) {
             if let medicineName = medicineName { medicationData[index].medicineName = medicineName }
             if let dosage = dosage { medicationData[index].dosage = dosage }
@@ -285,15 +266,12 @@ class MedicationDataModel {
             if let notes = notes { medicationData[index].notes = notes }
             if let frequency = frequency { medicationData[index].frequency = frequency }
             if let interval = interval { medicationData[index].interval = interval }
-            if let dosageInterval = dosageInterval { medicationData[index].dosageInterval = dosageInterval }
             if let startDate = startDate { medicationData[index].startDate = startDate }
             if let endDate = endDate { medicationData[index].endDate = endDate }
             if let time = time { medicationData[index].time = time }
         }
     }
 }
-
-// MARK: - Appointment Data Models
 
 class AppointmentDataModel {
     private var appointmentData: [Appointment] = []
@@ -307,7 +285,7 @@ class AppointmentDataModel {
             userId: userId,
             clinicName: clinicName,
             notes: notes,
-            time: time.timeIntervalSince1970,
+            time: time, // Using Date directly
             date: date,
             status: status
         )
@@ -327,14 +305,12 @@ class AppointmentDataModel {
         if let index = appointmentData.firstIndex(where: { $0.id == id }) {
             if let clinicName = clinicName { appointmentData[index].clinicName = clinicName }
             if let notes = notes { appointmentData[index].notes = notes }
-            if let time = time { appointmentData[index].time = time.timeIntervalSince1970 }
+            if let time = time { appointmentData[index].time = time }
             if let date = date { appointmentData[index].date = date }
             if let status = status { appointmentData[index].status = status }
         }
     }
 }
-
-// MARK: - Reports Data Models
 
 class ReportsDataModel {
     private var reportsData: [Reports] = []
@@ -377,8 +353,6 @@ class ReportsDataModel {
     }
 }
 
-// MARK: - HomeScreen Data Models
-
 class HomeScreenDataModel {
     static let shared = HomeScreenDataModel()
 
@@ -396,7 +370,7 @@ class HomeScreenDataModel {
 
     func fetchUserProfile(userId: UUID) -> (profileImage: String?, fullName: String)? {
         if let profile = ProfileDataModel.sharedProfileData.getProfileByUserId(id: userId) {
-            let fullName = "\(profile.firstName) \(profile.lastName)"
+            let fullName = [profile.firstName, profile.middleName, profile.lastName].compactMap { $0 }.joined(separator: " ")
             return (profile.profileImage, fullName)
         }
         return nil
@@ -406,11 +380,7 @@ class HomeScreenDataModel {
         let appointments = fetchLatestAppointments(userId: userId)
         let medications = fetchLatestMedications(userId: userId)
         let profile = fetchUserProfile(userId: userId)
-        
+
         return (appointments, medications, profile)
     }
 }
-
-
-  
-

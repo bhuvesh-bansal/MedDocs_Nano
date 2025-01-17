@@ -9,5 +9,5 @@ import UIKit
 
 class ReportCollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var imageView: UIImageView!
-    @IBOutlet weak var titleLabel: UILabel!
+    @IBOutlet weak var uploadDate: UILabel!
 }

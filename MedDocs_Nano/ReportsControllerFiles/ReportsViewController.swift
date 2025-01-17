@@ -32,7 +32,7 @@ class ReportsViewController: UIViewController {
 
     // MARK: Properties
     var hospitals: [Hospital] = [
-        Hospital(name: "City Hospital", imageText: "🏥", date: "12 Jan 2023"),
+        Hospital(name: "City Hospital", imageText: "🏥", date: "17 Jan 2025"),
         Hospital(name: "General Clinic", imageText: "🏥", date: "10 Feb 2023"),
         Hospital(name: "Apollo Hospital", imageText: "🏥", date: "15 Mar 2023")
     ]
