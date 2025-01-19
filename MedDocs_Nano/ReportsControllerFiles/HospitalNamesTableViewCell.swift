@@ -7,7 +7,7 @@
 
 import UIKit
 
-class hospitalNamesTableViewCell: UITableViewCell {
+class HospitalNamesTableViewCell: UITableViewCell {
 
     @IBOutlet weak var hospitalNameLabel: UILabel!
     

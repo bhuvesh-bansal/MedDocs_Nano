@@ -160,7 +160,7 @@ extension ReportsViewController: UITableViewDataSource, UITableViewDelegate {
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if tableView == hospitalTableView {
-            let cell = tableView.dequeueReusableCell(withIdentifier: "hospitalNamesTableViewCell", for: indexPath) as! hospitalNamesTableViewCell
+            let cell = tableView.dequeueReusableCell(withIdentifier: "hospitalNamesTableViewCell", for: indexPath) as! HospitalNamesTableViewCell
             let hospital = filteredHospitals[indexPath.row]
             let words = hospital.name.split(separator: " ")
             let firstLetters = words.prefix(2).compactMap { $0.first }.map { String($0) }.joined()
