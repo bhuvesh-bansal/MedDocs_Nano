@@ -15,11 +15,14 @@ class AddReportsViewController: UIViewController, UICollectionViewDelegate, UICo
     @IBOutlet weak var addReportImageButton: UIButton!
     @IBOutlet weak var reportsImagesCollectionView: UICollectionView!
     @IBOutlet weak var addAppointmentCollectionView: UICollectionView!
-    
     @IBOutlet weak var appointmentTextField: UITextField!
     @IBOutlet weak var showAppointmentTableView: UITableView!
+    
     @IBOutlet weak var addMedicationCollectionView: UICollectionView!
+    @IBOutlet weak var medicationTextField: UITextField!
+
     @IBOutlet weak var showMedicationTableView: UITableView!
+    
     
     @IBOutlet weak var tagNameTextFieldWidthConstraint: NSLayoutConstraint! // Fixed width constraint
     @IBOutlet weak var tagNameTextFieldExpandedWidthConstraint: NSLayoutConstraint! // Expandable width constraint

@@ -13,8 +13,9 @@
         <scene sceneID="nqJ-S7-Urh">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="9g2-Fc-AuU" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Reports" image="document" catalog="system" selectedImage="document.fill" id="Xeh-f8-Oge"/>
+                    <tabBarItem key="tabBarItem" title="Reports" image="folder" catalog="system" selectedImage="folder.fill" id="Xhk-MS-sbV"/>
                     <toolbarItems/>
+                    <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" largeTitles="YES" id="LBC-iX-GJc">
                         <rect key="frame" x="0.0" y="59" width="393" height="96"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -58,10 +59,10 @@
                                 </connections>
                             </segmentedControl>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="S4a-yd-cKz">
-                                <rect key="frame" x="0.0" y="254" width="393" height="515"/>
+                                <rect key="frame" x="0.0" y="254" width="393" height="466"/>
                                 <subviews>
                                     <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="Syl-R1-bJI">
-                                        <rect key="frame" x="10" y="10" width="373" height="505"/>
+                                        <rect key="frame" x="10" y="10" width="373" height="456"/>
                                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                         <prototypes>
                                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="hospitalNamesTableViewCell" rowHeight="95" id="P2Q-cL-a5E" customClass="HospitalNamesTableViewCell" customModule="MedDocs_Nano" customModuleProvider="target">
@@ -124,7 +125,7 @@
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="irE-NT-bq8">
-                                <rect key="frame" x="0.0" y="249" width="393" height="520"/>
+                                <rect key="frame" x="0.0" y="249" width="393" height="471"/>
                                 <subviews>
                                     <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="JYa-9d-q4W">
                                         <rect key="frame" x="10" y="10" width="373" height="40"/>
@@ -187,7 +188,7 @@
                                         </cells>
                                     </collectionView>
                                     <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="reJ-k1-8eL">
-                                        <rect key="frame" x="10" y="55" width="373" height="465"/>
+                                        <rect key="frame" x="10" y="55" width="373" height="416"/>
                                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                         <prototypes>
                                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="tagsDetailTableViewCell" rowHeight="100" id="PaW-zS-Zeq" customClass="tagsDetailTableViewCell" customModule="MedDocs_Nano" customModuleProvider="target">
@@ -292,7 +293,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ief-a0-LHa" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2918.320610687023" y="-2.1126760563380285"/>
+            <point key="canvasLocation" x="3069" y="556"/>
         </scene>
         <!--Hospital Name-->
         <scene sceneID="lSm-c7-a2N">
@@ -481,7 +482,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="nNq-3v-FrP" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3514" y="-2"/>
+            <point key="canvasLocation" x="4305" y="25"/>
         </scene>
         <!--Add Reports-->
         <scene sceneID="faT-nn-TsI">
@@ -560,7 +561,7 @@
                                                     <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                                 </collectionViewFlowLayout>
                                                 <cells>
-                                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="c4R-rr-FDF">
+                                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="ReportImageCell" id="c4R-rr-FDF" customClass="AddReportImageCollectionViewCell" customModule="MedDocs_Nano" customModuleProvider="target">
                                                         <rect key="frame" x="0.0" y="0.0" width="128" height="151"/>
                                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                         <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="GbZ-Mo-2tj">
@@ -580,15 +581,32 @@
                                                                     <nil key="textColor"/>
                                                                     <nil key="highlightedColor"/>
                                                                 </label>
+                                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dJw-JB-u0F">
+                                                                    <rect key="frame" x="88.666666666666671" y="111.33333333333333" width="30" height="29.999999999999986"/>
+                                                                    <constraints>
+                                                                        <constraint firstAttribute="width" constant="30" id="98B-ki-Qzp"/>
+                                                                        <constraint firstAttribute="height" constant="30" id="lAL-7j-BT3"/>
+                                                                    </constraints>
+                                                                    <state key="normal" title="Button"/>
+                                                                    <buttonConfiguration key="configuration" style="plain" image="xmark" catalog="system"/>
+                                                                </button>
                                                             </subviews>
                                                             <constraints>
                                                                 <constraint firstItem="cqZ-uC-Lcg" firstAttribute="centerX" secondItem="GbZ-Mo-2tj" secondAttribute="centerX" id="LOT-dL-8El"/>
+                                                                <constraint firstItem="dJw-JB-u0F" firstAttribute="leading" secondItem="cqZ-uC-Lcg" secondAttribute="trailing" constant="4" id="Lje-vZ-J43"/>
                                                                 <constraint firstItem="xZu-Hq-jSO" firstAttribute="leading" secondItem="GbZ-Mo-2tj" secondAttribute="leading" constant="8" id="NCQ-Nj-PQh"/>
                                                                 <constraint firstItem="xZu-Hq-jSO" firstAttribute="top" secondItem="GbZ-Mo-2tj" secondAttribute="top" constant="8" id="VoP-up-qji"/>
                                                                 <constraint firstItem="cqZ-uC-Lcg" firstAttribute="top" secondItem="xZu-Hq-jSO" secondAttribute="bottom" constant="8" id="d3b-fC-pnU"/>
+                                                                <constraint firstItem="dJw-JB-u0F" firstAttribute="leading" secondItem="cqZ-uC-Lcg" secondAttribute="trailing" constant="4" id="jsf-jt-WkH"/>
+                                                                <constraint firstItem="dJw-JB-u0F" firstAttribute="centerY" secondItem="cqZ-uC-Lcg" secondAttribute="centerY" id="wYQ-gb-JRW"/>
                                                             </constraints>
                                                         </collectionViewCellContentView>
                                                         <size key="customSize" width="128" height="151"/>
+                                                        <connections>
+                                                            <outlet property="addReportImageView" destination="xZu-Hq-jSO" id="CJY-f7-t0u"/>
+                                                            <outlet property="removeButton" destination="dJw-JB-u0F" id="X5U-GP-FkU"/>
+                                                            <outlet property="reportDateLabel" destination="cqZ-uC-Lcg" id="Lud-bN-aeF"/>
+                                                        </connections>
                                                     </collectionViewCell>
                                                 </cells>
                                             </collectionView>
@@ -732,62 +750,6 @@
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="Hqe-rt-s47">
-                                                <rect key="frame" x="16" y="916" width="361" height="50"/>
-                                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                                                <constraints>
-                                                    <constraint firstAttribute="height" constant="50" id="Hwc-bc-8E9"/>
-                                                </constraints>
-                                                <collectionViewFlowLayout key="collectionViewLayout" automaticEstimatedItemSize="YES" minimumLineSpacing="10" minimumInteritemSpacing="10" id="WAL-1x-bsp">
-                                                    <size key="itemSize" width="137" height="48"/>
-                                                    <size key="headerReferenceSize" width="0.0" height="0.0"/>
-                                                    <size key="footerReferenceSize" width="0.0" height="0.0"/>
-                                                    <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
-                                                </collectionViewFlowLayout>
-                                                <cells>
-                                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="medicationCell" id="aHh-J8-m2u">
-                                                        <rect key="frame" x="0.0" y="0.0" width="137" height="48"/>
-                                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                        <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="ubt-gx-tCS">
-                                                            <rect key="frame" x="0.0" y="0.0" width="137" height="48"/>
-                                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                            <subviews>
-                                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="close" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8qH-Z5-BXN">
-                                                                    <rect key="frame" x="0.0" y="7" width="137" height="34.333333333333336"/>
-                                                                    <buttonConfiguration key="configuration" style="plain" title="Medication"/>
-                                                                </button>
-                                                            </subviews>
-                                                            <constraints>
-                                                                <constraint firstItem="8qH-Z5-BXN" firstAttribute="centerX" secondItem="ubt-gx-tCS" secondAttribute="centerX" id="BKP-va-1t1"/>
-                                                                <constraint firstItem="8qH-Z5-BXN" firstAttribute="centerY" secondItem="ubt-gx-tCS" secondAttribute="centerY" id="HWz-Xa-AvX"/>
-                                                                <constraint firstAttribute="trailing" secondItem="8qH-Z5-BXN" secondAttribute="trailing" id="QEM-EM-Ohz"/>
-                                                            </constraints>
-                                                        </collectionViewCellContentView>
-                                                        <size key="customSize" width="137" height="48"/>
-                                                    </collectionViewCell>
-                                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="medicationTextFieldCell" id="eQa-hd-1dh">
-                                                        <rect key="frame" x="147" y="0.0" width="32" height="48"/>
-                                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                        <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="4WK-my-pTv">
-                                                            <rect key="frame" x="0.0" y="0.0" width="32" height="48"/>
-                                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                            <subviews>
-                                                                <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="iLO-8V-hxp">
-                                                                    <rect key="frame" x="0.0" y="7" width="32" height="34"/>
-                                                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                                    <textInputTraits key="textInputTraits"/>
-                                                                </textField>
-                                                            </subviews>
-                                                            <constraints>
-                                                                <constraint firstItem="iLO-8V-hxp" firstAttribute="centerY" secondItem="4WK-my-pTv" secondAttribute="centerY" id="Lmg-ci-s8F"/>
-                                                                <constraint firstAttribute="trailing" secondItem="iLO-8V-hxp" secondAttribute="trailing" id="UIe-G1-Yyw"/>
-                                                                <constraint firstItem="iLO-8V-hxp" firstAttribute="leading" secondItem="4WK-my-pTv" secondAttribute="leading" id="fhW-Bl-RtH"/>
-                                                                <constraint firstItem="iLO-8V-hxp" firstAttribute="centerX" secondItem="4WK-my-pTv" secondAttribute="centerX" id="ykB-yr-j0m"/>
-                                                            </constraints>
-                                                        </collectionViewCellContentView>
-                                                    </collectionViewCell>
-                                                </cells>
-                                            </collectionView>
                                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="rYa-KH-iQP">
                                                 <rect key="frame" x="16" y="974" width="361" height="200"/>
                                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -844,28 +806,100 @@
                                                     </tableViewCell>
                                                 </prototypes>
                                             </tableView>
+                                            <stackView opaque="NO" contentMode="scaleToFill" distribution="fillProportionally" alignment="center" spacing="2" translatesAutoresizingMaskIntoConstraints="NO" id="GHd-cG-YyF">
+                                                <rect key="frame" x="16" y="916" width="361" height="50"/>
+                                                <subviews>
+                                                    <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="vgD-Iu-QtS">
+                                                        <rect key="frame" x="0.0" y="0.0" width="222" height="50"/>
+                                                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                                        <constraints>
+                                                            <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="50" id="GJD-J5-5oo"/>
+                                                            <constraint firstAttribute="width" constant="200" id="bAu-fi-REB"/>
+                                                            <constraint firstAttribute="height" constant="50" id="p8Z-NC-UjG"/>
+                                                        </constraints>
+                                                        <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" automaticEstimatedItemSize="YES" minimumLineSpacing="10" minimumInteritemSpacing="10" id="8MC-gt-WIQ">
+                                                            <size key="itemSize" width="171" height="48"/>
+                                                            <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                                            <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                                            <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                                        </collectionViewFlowLayout>
+                                                        <cells>
+                                                            <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="MedicationTagCell" id="aag-vx-vxH" customClass="AddReportAddMedicationCollectionViewCell" customModule="MedDocs_Nano" customModuleProvider="target">
+                                                                <rect key="frame" x="0.0" y="1" width="171" height="48"/>
+                                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                                <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="zRQ-hs-kDd">
+                                                                    <rect key="frame" x="0.0" y="0.0" width="171" height="48"/>
+                                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                                    <subviews>
+                                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oSX-4t-ugE">
+                                                                            <rect key="frame" x="0.0" y="13.999999999999998" width="41.333333333333336" height="20.333333333333329"/>
+                                                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                                            <nil key="textColor"/>
+                                                                            <nil key="highlightedColor"/>
+                                                                        </label>
+                                                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vw9-CW-EX3">
+                                                                            <rect key="frame" x="41.333333333333336" y="14" width="20" height="20"/>
+                                                                            <constraints>
+                                                                                <constraint firstAttribute="height" constant="20" id="Usb-xw-595"/>
+                                                                                <constraint firstAttribute="width" constant="20" id="cAz-Ki-QcH"/>
+                                                                            </constraints>
+                                                                            <state key="normal" title="Button"/>
+                                                                            <buttonConfiguration key="configuration" style="plain" image="xmark" catalog="system"/>
+                                                                        </button>
+                                                                    </subviews>
+                                                                    <constraints>
+                                                                        <constraint firstItem="oSX-4t-ugE" firstAttribute="leading" secondItem="zRQ-hs-kDd" secondAttribute="leading" id="45Q-ZB-sh6"/>
+                                                                        <constraint firstItem="vw9-CW-EX3" firstAttribute="centerY" secondItem="zRQ-hs-kDd" secondAttribute="centerY" id="X1o-x9-aK7"/>
+                                                                        <constraint firstItem="oSX-4t-ugE" firstAttribute="centerY" secondItem="zRQ-hs-kDd" secondAttribute="centerY" id="a9Q-UX-Qbs"/>
+                                                                        <constraint firstItem="vw9-CW-EX3" firstAttribute="leading" secondItem="oSX-4t-ugE" secondAttribute="trailing" id="sij-K9-jLv"/>
+                                                                    </constraints>
+                                                                </collectionViewCellContentView>
+                                                                <size key="customSize" width="171" height="48"/>
+                                                                <connections>
+                                                                    <outlet property="medicationLabel" destination="oSX-4t-ugE" id="bFd-kh-L7P"/>
+                                                                    <outlet property="removeButton" destination="vw9-CW-EX3" id="I3f-JV-4wG"/>
+                                                                </connections>
+                                                            </collectionViewCell>
+                                                        </cells>
+                                                    </collectionView>
+                                                    <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Add Medication" textAlignment="natural" minimumFontSize="17" clearButtonMode="always" translatesAutoresizingMaskIntoConstraints="NO" id="QzG-Jd-SR9">
+                                                        <rect key="frame" x="224" y="8" width="137" height="34"/>
+                                                        <constraints>
+                                                            <constraint firstAttribute="width" constant="150" id="gsm-7R-hWW"/>
+                                                            <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="-32" id="iDC-r1-zaa"/>
+                                                        </constraints>
+                                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                        <textInputTraits key="textInputTraits"/>
+                                                    </textField>
+                                                </subviews>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="50" id="1su-3h-yzC"/>
+                                                    <constraint firstItem="QzG-Jd-SR9" firstAttribute="top" secondItem="GHd-cG-YyF" secondAttribute="top" constant="8" id="AK9-uR-mWN"/>
+                                                    <constraint firstAttribute="trailing" secondItem="QzG-Jd-SR9" secondAttribute="trailing" id="Chf-3m-34F"/>
+                                                </constraints>
+                                            </stackView>
                                         </subviews>
                                         <constraints>
-                                            <constraint firstItem="Hqe-rt-s47" firstAttribute="leading" secondItem="Epg-Hr-g6X" secondAttribute="leading" constant="16" id="0O3-CX-K5p"/>
                                             <constraint firstItem="Kef-bl-iy7" firstAttribute="top" secondItem="0N2-8u-E18" secondAttribute="bottom" constant="8" id="155-yU-G5U"/>
                                             <constraint firstItem="Kef-bl-iy7" firstAttribute="leading" secondItem="Epg-Hr-g6X" secondAttribute="leading" constant="16" id="1yx-lV-1JQ"/>
                                             <constraint firstItem="IfU-on-mkQ" firstAttribute="leading" secondItem="Epg-Hr-g6X" secondAttribute="leading" constant="16" id="237-dt-Qc1"/>
+                                            <constraint firstItem="rYa-KH-iQP" firstAttribute="top" secondItem="GHd-cG-YyF" secondAttribute="bottom" constant="8" id="52o-mJ-YUO"/>
                                             <constraint firstAttribute="height" constant="1600" id="5xq-0Q-84L"/>
                                             <constraint firstItem="oEy-Id-UQO" firstAttribute="top" secondItem="ZUu-W6-afu" secondAttribute="bottom" constant="8" id="7NB-10-AoV"/>
                                             <constraint firstItem="0N2-8u-E18" firstAttribute="leading" secondItem="Epg-Hr-g6X" secondAttribute="leading" constant="16" id="7zV-Yk-Lvk"/>
                                             <constraint firstItem="0N2-8u-E18" firstAttribute="top" secondItem="RSV-xF-zzl" secondAttribute="bottom" constant="16" id="9SH-VN-iPm"/>
                                             <constraint firstItem="DFZ-aK-cYD" firstAttribute="leading" secondItem="Epg-Hr-g6X" secondAttribute="leading" constant="16" id="A6H-Hi-TJC"/>
                                             <constraint firstItem="K22-P5-s7A" firstAttribute="top" secondItem="I4Y-hE-2XP" secondAttribute="bottom" constant="16" id="Avy-xE-rV5"/>
-                                            <constraint firstItem="Hqe-rt-s47" firstAttribute="top" secondItem="kr7-9d-U7t" secondAttribute="bottom" constant="8" id="B8R-Fp-p8j"/>
                                             <constraint firstItem="K22-P5-s7A" firstAttribute="leading" secondItem="Epg-Hr-g6X" secondAttribute="leading" constant="16" id="BuZ-It-xSo"/>
-                                            <constraint firstItem="rYa-KH-iQP" firstAttribute="top" secondItem="Hqe-rt-s47" secondAttribute="bottom" constant="8" id="ETx-rn-ws9"/>
                                             <constraint firstItem="ZUu-W6-afu" firstAttribute="leading" secondItem="Epg-Hr-g6X" secondAttribute="leading" constant="16" id="FCS-9t-XJ2"/>
                                             <constraint firstItem="ix1-BV-a4b" firstAttribute="leading" secondItem="Epg-Hr-g6X" secondAttribute="leading" constant="16" id="G49-75-cRB"/>
                                             <constraint firstItem="wny-bQ-Kvv" firstAttribute="top" secondItem="Epg-Hr-g6X" secondAttribute="top" constant="16" id="ILZ-Ac-KQD"/>
+                                            <constraint firstItem="GHd-cG-YyF" firstAttribute="leading" secondItem="Epg-Hr-g6X" secondAttribute="leading" constant="16" id="IbP-mQ-vQg"/>
                                             <constraint firstItem="I4Y-hE-2XP" firstAttribute="leading" secondItem="Epg-Hr-g6X" secondAttribute="leading" constant="16" id="J1l-xl-MO7"/>
                                             <constraint firstItem="I4Y-hE-2XP" firstAttribute="top" secondItem="ix1-BV-a4b" secondAttribute="bottom" constant="8" id="J1n-bS-RMu"/>
                                             <constraint firstItem="RSV-xF-zzl" firstAttribute="top" secondItem="IfU-on-mkQ" secondAttribute="bottom" constant="8" id="MZy-03-4tg"/>
                                             <constraint firstAttribute="trailing" secondItem="RSV-xF-zzl" secondAttribute="trailing" constant="16" id="Mkv-Cq-E6w"/>
+                                            <constraint firstItem="GHd-cG-YyF" firstAttribute="top" secondItem="kr7-9d-U7t" secondAttribute="bottom" constant="8" id="PEi-P5-mvb"/>
                                             <constraint firstItem="oEy-Id-UQO" firstAttribute="centerX" secondItem="Epg-Hr-g6X" secondAttribute="centerX" id="Sff-E3-Cb3"/>
                                             <constraint firstItem="ix1-BV-a4b" firstAttribute="top" secondItem="Kef-bl-iy7" secondAttribute="bottom" constant="16" id="U2s-c6-wEE"/>
                                             <constraint firstAttribute="trailing" secondItem="oEy-Id-UQO" secondAttribute="trailing" constant="16" id="UfQ-qC-uzb"/>
@@ -880,11 +914,11 @@
                                             <constraint firstItem="IfU-on-mkQ" firstAttribute="top" secondItem="DFZ-aK-cYD" secondAttribute="bottom" constant="16" id="fgK-XO-YPX"/>
                                             <constraint firstAttribute="trailing" secondItem="I4Y-hE-2XP" secondAttribute="trailing" constant="16" id="iT8-2Z-JDt"/>
                                             <constraint firstAttribute="trailing" secondItem="PWz-GM-bY3" secondAttribute="trailing" constant="16" id="kRX-qt-CgT"/>
-                                            <constraint firstAttribute="trailing" secondItem="Hqe-rt-s47" secondAttribute="trailing" constant="16" id="lFx-U9-gmH"/>
                                             <constraint firstAttribute="trailing" secondItem="rYa-KH-iQP" secondAttribute="trailing" constant="16" id="mhs-bu-yuw"/>
                                             <constraint firstItem="RSV-xF-zzl" firstAttribute="leading" secondItem="Epg-Hr-g6X" secondAttribute="leading" constant="16" id="nf2-iZ-zmM"/>
                                             <constraint firstItem="ZUu-W6-afu" firstAttribute="top" secondItem="K22-P5-s7A" secondAttribute="bottom" constant="8" id="ppv-ej-N3T"/>
                                             <constraint firstAttribute="trailing" secondItem="DFZ-aK-cYD" secondAttribute="trailing" constant="16" id="rBq-QS-ZKK"/>
+                                            <constraint firstAttribute="trailing" secondItem="GHd-cG-YyF" secondAttribute="trailing" constant="16" id="vFd-rI-pEC"/>
                                             <constraint firstItem="PWz-GM-bY3" firstAttribute="top" secondItem="Kef-bl-iy7" secondAttribute="bottom" constant="16" id="wTX-iW-k5L"/>
                                             <constraint firstItem="rYa-KH-iQP" firstAttribute="leading" secondItem="Epg-Hr-g6X" secondAttribute="leading" constant="16" id="yeL-Ts-Hb7"/>
                                         </constraints>
@@ -914,10 +948,11 @@
                     </navigationItem>
                     <connections>
                         <outlet property="addAppointmentCollectionView" destination="JLQ-HC-no4" id="oJ7-K5-CyA"/>
-                        <outlet property="addMedicationCollectionView" destination="Hqe-rt-s47" id="wKA-xc-aY3"/>
+                        <outlet property="addMedicationCollectionView" destination="vgD-Iu-QtS" id="p2d-89-ico"/>
                         <outlet property="addReportImageButton" destination="PWz-GM-bY3" id="QJ8-fJ-dXV"/>
                         <outlet property="appointmentTextField" destination="jx9-oh-r49" id="w2K-L8-lbm"/>
                         <outlet property="hospitalNameTextField" destination="RSV-xF-zzl" id="mnG-7W-ihj"/>
+                        <outlet property="medicationTextField" destination="QzG-Jd-SR9" id="EiZ-ID-XrP"/>
                         <outlet property="notesTextField" destination="Kef-bl-iy7" id="X3t-22-d6o"/>
                         <outlet property="reportsImagesCollectionView" destination="I4Y-hE-2XP" id="tZu-cC-Uyt"/>
                         <outlet property="showAppointmentTableView" destination="oEy-Id-UQO" id="tai-3i-arA"/>
@@ -929,7 +964,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="sMA-Ia-6En" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3514" y="-727"/>
+            <point key="canvasLocation" x="3513.740458015267" y="-727.46478873239437"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="Ma1-HN-yjm">
@@ -951,11 +986,11 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="QWs-TC-Q30"/>
+        <segue reference="OZO-2m-mmb"/>
     </inferredMetricsTieBreakers>
     <resources>
-        <image name="document" catalog="system" width="115" height="128"/>
-        <image name="document.fill" catalog="system" width="115" height="128"/>
+        <image name="folder" catalog="system" width="128" height="96"/>
+        <image name="folder.fill" catalog="system" width="128" height="96"/>
         <image name="google-logo-removebg-preview" width="200" height="200"/>
         <image name="xmark" catalog="system" width="128" height="113"/>
         <systemColor name="systemBackgroundColor">
