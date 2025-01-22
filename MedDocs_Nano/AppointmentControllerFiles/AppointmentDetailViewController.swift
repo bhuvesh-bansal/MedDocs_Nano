@@ -1,13 +1,13 @@
 //
-//  ReportDetailViewController.swift
+//  AppointmentDetailViewController.swift
 //  MedDocs_Nano
 //
-//  Created by Bhuvesh Bansal on 16/01/25.
+//  Created by Bhuvesh Bansal on 20/01/25.
 //
 
 import UIKit
 
-struct MedicationOne {
+struct MedicationTwo {
     let name: String
     let dosage: String
     let type: String
@@ -15,28 +15,27 @@ struct MedicationOne {
     let time: String
 }
 
-struct ReportOne {
+struct ReportTwo {
     let imageUrl: String
     let uploadDate: String
 }
 
-class ReportDetailsViewController: UIViewController {
-    // Outlets
-    @IBOutlet weak var medicationTableView: UITableView!
-    // Identifier: MedicationCell
-    @IBOutlet weak var reportsCollectionView: UICollectionView!
-    @IBOutlet weak var lastUpdatedDateLabel: UILabel!
-    @IBOutlet weak var notesLabel: UILabel!
+class AppointmentDetailViewController: UIViewController {
 
-    // Data Models
-    var medications: [MedicationOne] = []
-    var reports: [ReportOne] = []
+    @IBOutlet weak var lastUpdatedDateLabel: UILabel!
+    @IBOutlet weak var doctorNameLabel: UILabel!
+    @IBOutlet weak var notesLabel: UILabel!
+    @IBOutlet weak var medicationTableView: UITableView!
+    // identifier MedicationCell
+    @IBOutlet weak var tagNameLabel: UILabel!
+    @IBOutlet weak var reportsCollectionView: UICollectionView!
+    // identifier reportsCell
+
+    var medications: [MedicationTwo] = []
+    var reports: [ReportTwo] = []
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Set the title of the page
-        navigationItem.title = "City Hospital"
 
         // Setup TableView
         medicationTableView.dataSource = self
@@ -51,23 +50,25 @@ class ReportDetailsViewController: UIViewController {
     }
 
     private func loadData() {
-        // Updated Medication Data
+        // Dummy data for medications
         medications = [
-            MedicationOne(name: "Paracetamol", dosage: "500 mg", type: "Tablet", date: "20/01/2025", time: "08:00 AM"),
-            MedicationOne(name: "Ibuprofen", dosage: "200 mg", type: "Capsule", date: "18/01/2025", time: "09:00 PM"),
-            MedicationOne(name: "Cetirizine", dosage: "10 mg", type: "Tablet", date: "15/01/2025", time: "07:30 AM"),
-            MedicationOne(name: "Amoxicillin", dosage: "250 mg", type: "Syrup", date: "22/01/2025", time: "12:00 PM")
+            MedicationTwo(name: "Paracetamol", dosage: "500 mg", type: "Tablet", date: "20/01/2025", time: "08:00 AM"),
+            MedicationTwo(name: "Ibuprofen", dosage: "200 mg", type: "Capsule", date: "18/01/2025", time: "09:00 PM"),
+            MedicationTwo(name: "Cetirizine", dosage: "10 mg", type: "Tablet", date: "15/01/2025", time: "07:30 AM"),
+            MedicationTwo(name: "Amoxicillin", dosage: "250 mg", type: "Syrup", date: "22/01/2025", time: "12:00 PM")
         ]
 
-        // Updated Reports Data
+        // Dummy data for reports
         reports = [
-            ReportOne(imageUrl: "lab_report", uploadDate: "January 15, 2025"),
-            ReportOne(imageUrl: "prescription", uploadDate: "January 10, 2025")
+            ReportTwo(imageUrl: "lab_report", uploadDate: "January 15, 2025"),
+            ReportTwo(imageUrl: "prescription", uploadDate: "January 10, 2025")
         ]
 
         // Update UI elements
         lastUpdatedDateLabel.text = "Last Updated: \(getCurrentDate())"
-        notesLabel.text = "These reports are the latest from your recent consultation."
+        doctorNameLabel.text = "Dr. John Smith"
+        notesLabel.text = "Follow-up consultation notes will appear here."
+        tagNameLabel.text = "General Check-up"
 
         // Reload Data
         medicationTableView.reloadData()
@@ -83,7 +84,7 @@ class ReportDetailsViewController: UIViewController {
 }
 
 // MARK: - UITableViewDataSource and UITableViewDelegate
-extension ReportDetailsViewController: UITableViewDataSource, UITableViewDelegate {
+extension AppointmentDetailViewController: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return medications.count
     }
@@ -112,21 +113,34 @@ extension ReportDetailsViewController: UITableViewDataSource, UITableViewDelegat
 }
 
 // MARK: - UICollectionViewDataSource and UICollectionViewDelegateFlowLayout
-extension ReportDetailsViewController: UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
+extension AppointmentDetailViewController: UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return reports.count
     }
 
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "ReportCell", for: indexPath) as! ReportCollectionViewCell
+        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "reportsCell", for: indexPath) as? ReportCollectionViewCell else {
+            return UICollectionViewCell() // Return a default cell if dequeuing fails
+        }
+
         let report = reports[indexPath.item]
 
+        // Safely load the image
+        if let image = UIImage(named: report.imageUrl) {
+            cell.imageView.image = image
+        } else {
+            // Fallback to a placeholder image if not found
+            cell.imageView.image = UIImage(systemName: "doc.text") // Placeholder SF Symbol
+            print("Image not found for report: \(report.imageUrl)")
+        }
+
         // Configure the cell
-        cell.imageView.image = UIImage(named: report.imageUrl) // Ensure this name exists in Assets
         cell.uploadDate.text = report.uploadDate
 
         return cell
     }
+
+
 
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         return CGSize(width: 100, height: 150)

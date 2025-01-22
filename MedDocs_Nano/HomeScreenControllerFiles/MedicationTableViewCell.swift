@@ -1,20 +1,24 @@
 //
 //  MedicationTableViewCell.swift
-//  MedDocs_Nano
+//  HomeScreen_MedDocs
 //
-//  Created by Bhuvesh Bansal on 16/01/25.
+//  Created by Vansh Sharma on 20/01/25.
 //
 
 import UIKit
 
 class MedicationTableViewCell: UITableViewCell {
 
+    @IBOutlet weak var TypeImage: UIImageView!
     
-    @IBOutlet weak var medicationImageTextLabel: UILabel!
+    @IBOutlet weak var MedicineName: UILabel!
     
-    @IBOutlet weak var medicationNameLabel: UILabel!
-    @IBOutlet weak var medicationDosage: UILabel!
-    @IBOutlet weak var medicineTiming: UILabel!
+    @IBOutlet weak var Dosage: UILabel!
+    
+    @IBOutlet weak var `Type`: UILabel!
+    
+    @IBOutlet weak var MedicineDateTime: UILabel!
+    
     
     override func awakeFromNib() {
         super.awakeFromNib()

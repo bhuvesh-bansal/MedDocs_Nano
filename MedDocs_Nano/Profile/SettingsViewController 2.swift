@@ -1,3 +1,8 @@
+
+//  MedDocs_Nano
+//
+//  Created by TRISHA on 20/01/25.
+//
 import UIKit
 
 class SettingsViewController: UITableViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {

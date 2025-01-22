@@ -10,4 +10,10 @@ import UIKit
 class ReportCollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var imageView: UIImageView!
     @IBOutlet weak var uploadDate: UILabel!
+    
+    override func awakeFromNib() {
+        super.awakeFromNib()
+        print("ReportCollectionViewCell initialized")
+    }
 }
+

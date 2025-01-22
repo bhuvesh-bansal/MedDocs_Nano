@@ -30,6 +30,7 @@ class ReportsViewController: UIViewController {
     @IBOutlet weak var tagTableView: UITableView!
     @IBOutlet weak var tagView: UIView!
 
+    
     // MARK: Properties
     var hospitals: [Hospital] = [
         Hospital(name: "City Hospital", imageText: "🏥", date: "17 Jan 2025"),

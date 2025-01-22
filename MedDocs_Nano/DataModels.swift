@@ -51,23 +51,61 @@ enum MedicineType: String, CaseIterable, Codable {
 }
 
 enum DosageFrequency: String, CaseIterable, Codable {
-    case everyday = "Everyday"
+    case everyDay = "EveryDay"
     case everyFewDays = "Every Few Days"
-    // Consider more specific intervals like DAILY, WEEKLY, MONTHLY
 }
 
 // MARK: - Structs
 
-struct User: Codable {
+struct Dosage: Codable {
     var id: UUID
-    var profile: ProfileInfo
-    var loginInfo: UserLoginInfo
+    var time: Date
 }
 
-struct UserLoginInfo: Codable {
+struct Medication: Codable {
     var id: UUID
-    var email: String
-    var password: String
+    var userId: UUID
+    var medicineName: String
+    var hospitalName: String
+    var doctorName: String
+    var type: MedicineType
+    var dosage: Int
+    var notes: String
+    var frequency: DosageFrequency
+    var interval: Int?
+    var startDate: Date
+    var endDate: Date?
+    var time: Date
+    var tags: [String]
+}
+
+
+struct Appointment: Codable {
+    var id: UUID
+    var userId: UUID
+    var doctorName: String
+    var hospitalName: String
+    var tag: String
+    var notes: String
+    var time: Date
+    var date: Date
+    var status: AppointmentStatus
+}
+
+struct Report: Codable {
+    var id: UUID
+    var userId: UUID
+    var imagePath: String
+    var time: Date
+    var date: Date
+}
+
+struct Prescription: Codable {
+    var id: UUID
+    var userId: UUID
+    var imagePath: String
+    var time: Date
+    var date: Date
 }
 
 struct ProfileInfo: Codable {
@@ -85,64 +123,82 @@ struct ProfileInfo: Codable {
     var address: String?
 }
 
-struct Dosage: Codable {
+struct UserLoginInfo: Codable {
     var id: UUID
-    var time: Date
+    var email: String
+    var password: String
 }
 
-struct Medication: Codable {
+struct User: Codable {
     var id: UUID
-    var userId: UUID
-    var medicineName: String
-    var type: MedicineType
-    var dosage: Int
-    var notes: String
-    var frequency: DosageFrequency
-    var interval: Int?
-    // Consider a separate DosageSchedule struct for more details
-    var startDate: Date
-    var endDate: Date?
-    var time: Date
+    var profile: ProfileInfo
+    var loginInfo: UserLoginInfo
 }
 
-struct Appointment: Codable {
+struct tags: Codable {
     var id: UUID
     var userId: UUID
-    var clinicName: String
-    var notes: String
-    var time: Date // Changed from TimeInterval
-    var date: Date
-    var status: AppointmentStatus
-}
-
-struct Report: Codable {
-    var id: UUID
-    var userId: UUID
-    var imagePath: String
-    var time: Date // Changed from TimeInterval
-    var date: Date
-}
-
-struct Prescription: Codable {
-    var id: UUID
-    var userId: UUID
-    var imagePath: String
-    var time: Date // Changed from TimeInterval
-    var date: Date
-}
-
-struct Reports: Codable {
-    var id: UUID
-    var userId: UUID
-    var tag: String
-    var name: String
-    var color: String
+    var tagName: String
+    var hospitalName: String
+    var appointment: [String]
+    var medication: [String]
     var notes: String
     var prescriptions: [Prescription]
     var reports: [Report]
 }
 
 // MARK: - Data Models
+
+class UserLoginDataModel {
+    static let shared = UserLoginDataModel()
+    private var userLogins: [UUID: UserLoginInfo] = [:]
+
+    private init() {}
+
+    // Register a new user
+    func registerUser(email: String, password: String) -> UUID? {
+        // Check if the email is already registered
+        if userLogins.values.contains(where: { $0.email == email }) {
+            print("Email is already registered.")
+            return nil
+        }
+
+        // Create a new user ID and store the login info
+        let userId = UUID()
+        let userInfo = UserLoginInfo(id: userId, email: email, password: password)
+        userLogins[userId] = userInfo
+        return userId
+    }
+
+    // Get user by email and password (Login simulation)
+    func getUser(email: String, password: String) -> UUID? {
+        for (id, userInfo) in userLogins {
+            if userInfo.email == email && userInfo.password == password {
+                return id
+            }
+        }
+        print("Invalid email or password.")
+        return nil
+    }
+
+    // Delete a user by their ID
+    func deleteUser(by id: UUID) {
+        if userLogins[id] != nil {
+            userLogins.removeValue(forKey: id)
+            print("User deleted successfully.")
+        } else {
+            print("User not found.")
+        }
+    }
+
+    // List all registered users (for testing or debugging)
+    func listAllUsers() {
+        for (id, userInfo) in userLogins {
+            print("User ID: \(id), Email: \(userInfo.email)")
+        }
+    }
+}
+
 
 class UserDataModel {
     private var users: [User] = []
@@ -183,10 +239,23 @@ class ProfileDataModel {
 
     private init() {}
 
-    func addProfile(email: String, firstName: String, middleName: String?, lastName: String, DOB: Date, phoneNumber: String, sex: Gender, bloodType: BloodType, allergies: [AllergyType], address: String?) {
+    func addProfile(
+        userId: UUID,
+        profileImage: String?,
+        email: String,
+        firstName: String,
+        middleName: String?,
+        lastName: String,
+        DOB: Date,
+        phoneNumber: String,
+        sex: Gender,
+        bloodType: BloodType,
+        allergies: [AllergyType],
+        address: String?
+    ) -> ProfileInfo {
         let newProfile = ProfileInfo(
-            id: UUID(),
-            profileImage: nil,
+            id: userId, // Use the same ID as the user
+            profileImage: profileImage,
             email: email,
             firstName: firstName,
             middleName: middleName,
@@ -199,7 +268,9 @@ class ProfileDataModel {
             address: address
         )
         profiles.append(newProfile)
+        return newProfile
     }
+
 
     func getProfileByUserId(id: UUID) -> ProfileInfo? {
         return profiles.first { $0.id == id }
@@ -227,7 +298,7 @@ class ProfileDataModel {
 }
 
 class MedicationDataModel {
-    private var medicationData: [Medication] = []
+    private var medications: [Medication] = []
     static let sharedMedicationData = MedicationDataModel()
 
     private init() {}
@@ -237,6 +308,8 @@ class MedicationDataModel {
             id: UUID(),
             userId: userId,
             medicineName: medicineName,
+            hospitalName: "Hospital Name", // Example
+            doctorName: "Doctor Name", // Example
             type: type,
             dosage: dosage,
             notes: notes,
@@ -244,143 +317,110 @@ class MedicationDataModel {
             interval: interval,
             startDate: startDate,
             endDate: endDate,
-            time: time
+            time: time,
+            tags: [] // Empty array for now
         )
-        medicationData.append(newMedication)
+        medications.append(newMedication)
         return newMedication
     }
 
     func getMedications(for userId: UUID) -> [Medication] {
-        return medicationData.filter { $0.userId == userId }
+        return medications.filter { $0.userId == userId }
     }
 
     func deleteMedication(by id: UUID) {
-        medicationData.removeAll { $0.id == id }
+        medications.removeAll { $0.id == id }
     }
 
     func editMedication(id: UUID, medicineName: String?, dosage: Int?, type: MedicineType?, notes: String?, frequency: DosageFrequency?, interval: Int?, startDate: Date?, endDate: Date?, time: Date?) {
-        if let index = medicationData.firstIndex(where: { $0.id == id }) {
-            if let medicineName = medicineName { medicationData[index].medicineName = medicineName }
-            if let dosage = dosage { medicationData[index].dosage = dosage }
-            if let type = type { medicationData[index].type = type }
-            if let notes = notes { medicationData[index].notes = notes }
-            if let frequency = frequency { medicationData[index].frequency = frequency }
-            if let interval = interval { medicationData[index].interval = interval }
-            if let startDate = startDate { medicationData[index].startDate = startDate }
-            if let endDate = endDate { medicationData[index].endDate = endDate }
-            if let time = time { medicationData[index].time = time }
+        if let index = medications.firstIndex(where: { $0.id == id }) {
+            if let medicineName = medicineName { medications[index].medicineName = medicineName }
+            if let dosage = dosage { medications[index].dosage = dosage }
+            if let type = type { medications[index].type = type }
+            if let notes = notes { medications[index].notes = notes }
+            if let frequency = frequency { medications[index].frequency = frequency }
+            if let interval = interval { medications[index].interval = interval }
+            if let startDate = startDate { medications[index].startDate = startDate }
+            if let endDate = endDate { medications[index].endDate = endDate }
+            if let time = time { medications[index].time = time }
         }
     }
 }
 
 class AppointmentDataModel {
-    private var appointmentData: [Appointment] = []
+    private var appointments: [Appointment] = []
     static let sharedAppointmentData = AppointmentDataModel()
 
     private init() {}
 
-    func addAppointment(userId: UUID, clinicName: String, notes: String, time: Date, date: Date, status: AppointmentStatus) -> Appointment {
+    func addAppointment(userId: UUID, doctorName: String, hospitalName: String, tag: String, notes: String, time: Date, date: Date, status: AppointmentStatus) -> Appointment {
         let newAppointment = Appointment(
             id: UUID(),
             userId: userId,
-            clinicName: clinicName,
+            doctorName: doctorName,
+            hospitalName: hospitalName,
+            tag: tag,
             notes: notes,
-            time: time, // Using Date directly
+            time: time,
             date: date,
             status: status
         )
-        appointmentData.append(newAppointment)
+        appointments.append(newAppointment)
         return newAppointment
     }
 
     func getAppointments(for userId: UUID) -> [Appointment] {
-        return appointmentData.filter { $0.userId == userId }
+        return appointments.filter { $0.userId == userId }
     }
 
     func deleteAppointment(by id: UUID) {
-        appointmentData.removeAll { $0.id == id }
+        appointments.removeAll { $0.id == id }
     }
 
-    func editAppointment(id: UUID, clinicName: String?, notes: String?, time: Date?, date: Date?, status: AppointmentStatus?) {
-        if let index = appointmentData.firstIndex(where: { $0.id == id }) {
-            if let clinicName = clinicName { appointmentData[index].clinicName = clinicName }
-            if let notes = notes { appointmentData[index].notes = notes }
-            if let time = time { appointmentData[index].time = time }
-            if let date = date { appointmentData[index].date = date }
-            if let status = status { appointmentData[index].status = status }
+    func editAppointment(id: UUID, doctorName: String?, hospitalName: String?, tag: String?, notes: String?, time: Date?, date: Date?, status: AppointmentStatus?) {
+        if let index = appointments.firstIndex(where: { $0.id == id }) {
+            if let doctorName = doctorName { appointments[index].doctorName = doctorName }
+            if let hospitalName = hospitalName { appointments[index].hospitalName = hospitalName }
+            if let tag = tag { appointments[index].tag = tag }
+            if let notes = notes { appointments[index].notes = notes }
+            if let time = time { appointments[index].time = time }
+            if let date = date { appointments[index].date = date }
+            if let status = status { appointments[index].status = status }
         }
     }
 }
 
-class ReportsDataModel {
-    private var reportsData: [Reports] = []
-    static let sharedReportsData = ReportsDataModel()
+class ReportDataModel {
+    private var reports: [Report] = []
+    static let sharedReportData = ReportDataModel()
 
     private init() {}
 
-    func addReport(userId: UUID, tag: String, name: String, color: String, notes: String, prescription: [Prescription], report: [Report]) -> Reports {
-        let newReport = Reports(
+    func addReport(userId: UUID, imagePath: String, time: Date, date: Date) -> Report {
+        let newReport = Report(
             id: UUID(),
             userId: userId,
-            tag: tag,
-            name: name,
-            color: color,
-            notes: notes,
-            prescriptions: prescription,
-            reports: report
+            imagePath: imagePath,
+            time: time,
+            date: date
         )
-        reportsData.append(newReport)
+        reports.append(newReport)
         return newReport
     }
 
-    func getReports(for userId: UUID) -> [Reports] {
-        return reportsData.filter { $0.userId == userId }
+    func getReports(for userId: UUID) -> [Report] {
+        return reports.filter { $0.userId == userId }
     }
 
     func deleteReport(by id: UUID) {
-        reportsData.removeAll { $0.id == id }
+        reports.removeAll { $0.id == id }
     }
 
-    func editReport(id: UUID, tag: String?, name: String?, color: String?, notes: String?, prescription: [Prescription]?, report: [Report]?) {
-        if let index = reportsData.firstIndex(where: { $0.id == id }) {
-            if let tag = tag { reportsData[index].tag = tag }
-            if let name = name { reportsData[index].name = name }
-            if let color = color { reportsData[index].color = color }
-            if let notes = notes { reportsData[index].notes = notes }
-            if let prescription = prescription { reportsData[index].prescriptions = prescription }
-            if let report = report { reportsData[index].reports = report }
+    func editReport(id: UUID, imagePath: String?, time: Date?, date: Date?) {
+        if let index = reports.firstIndex(where: { $0.id == id }) {
+            if let imagePath = imagePath { reports[index].imagePath = imagePath }
+            if let time = time { reports[index].time = time }
+            if let date = date { reports[index].date = date }
         }
-    }
-}
-
-class HomeScreenDataModel {
-    static let shared = HomeScreenDataModel()
-
-    private init() {}
-
-    func fetchLatestAppointments(userId: UUID) -> [Appointment] {
-        let allAppointments = AppointmentDataModel.sharedAppointmentData.getAppointments(for: userId)
-        return Array(allAppointments.prefix(2))
-    }
-
-    func fetchLatestMedications(userId: UUID) -> [Medication] {
-        let allMedications = MedicationDataModel.sharedMedicationData.getMedications(for: userId)
-        return Array(allMedications.prefix(2))
-    }
-
-    func fetchUserProfile(userId: UUID) -> (profileImage: String?, fullName: String)? {
-        if let profile = ProfileDataModel.sharedProfileData.getProfileByUserId(id: userId) {
-            let fullName = [profile.firstName, profile.middleName, profile.lastName].compactMap { $0 }.joined(separator: " ")
-            return (profile.profileImage, fullName)
-        }
-        return nil
-    }
-
-    func fetchHomeScreenData(userId: UUID) -> (appointments: [Appointment], medications: [Medication], profile: (String?, String)?) {
-        let appointments = fetchLatestAppointments(userId: userId)
-        let medications = fetchLatestMedications(userId: userId)
-        let profile = fetchUserProfile(userId: userId)
-
-        return (appointments, medications, profile)
     }
 }

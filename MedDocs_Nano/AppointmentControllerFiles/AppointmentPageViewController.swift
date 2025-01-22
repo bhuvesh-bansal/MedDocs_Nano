@@ -1,3 +1,10 @@
+//
+//  AppointmentPageViewController.swift
+//  MedDocs_Nano
+//
+//  Created by Bhuvesh Bansal on 20/01/25.
+//
+
 import UIKit
 
 class AppointmentPageViewController: UIViewController {
@@ -44,7 +51,7 @@ extension AppointmentPageViewController: UITableViewDelegate, UITableViewDataSou
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "AppointmentMainPageNamesTableViewCell", for: indexPath) as! AppointmentMainPageNamesTableViewCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: "AppointmentMainPageNamesTableViewCell", for: indexPath) as! AppointmentDetailTableViewCell
         let appointment = filteredAppointments[indexPath.row]
 
         // Debugging logs
