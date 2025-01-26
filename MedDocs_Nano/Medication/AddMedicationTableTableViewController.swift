@@ -1,12 +1,17 @@
 import UIKit
 
-class AddMedicationTableViewController: UITableViewController {
+protocol AddMedicationDelegate: AnyObject {
+    func didAddMedication(_ medication: Medication)
+}
 
+class AddMedicationTableTableViewController: UITableViewController {
+    
     // MARK: - IBOutlets
+    weak var delegate: AddMedicationDelegate?
     @IBOutlet weak var medicationNameTextField: UITextField!
     @IBOutlet weak var hospitalNameTextField: UITextField!
     @IBOutlet weak var doctorNameTextField: UITextField!
-    @IBOutlet weak var appointmentName: UITextField! // Corrected name
+    @IBOutlet weak var appointmentName: UITextField!
     @IBOutlet weak var medicineTypeButton: UIButton!
     @IBOutlet weak var frequencyButton: UIButton!
     @IBOutlet weak var amountTextField: UITextField!
@@ -16,36 +21,88 @@ class AddMedicationTableViewController: UITableViewController {
     @IBOutlet weak var secondDoseTimeLabel: UILabel!
     @IBOutlet weak var firstDoseTimePicker: UIDatePicker!
     @IBOutlet weak var secondDoseTimePicker: UIDatePicker!
-
+    
     // MARK: - Properties
     var selectedMedicineType: MedicineType?
     var selectedFrequency: DosageFrequency?
-
+    var selectedInterval: Int = 1 // Default to 1 day for "Every Few Days"
+    var onMedicationAdded: ((Medication) -> Void)?
+    
     // MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
         configureMedicineTypeButton()
         configureFrequencyButton()
-
-        // Set initial values for the stepper and text field
         amountStepper.value = 1
         amountTextField.text = "\(Int(amountStepper.value))"
-
-        // Add targets for the stepper and text field
         amountStepper.addTarget(self, action: #selector(stepperValueChanged), for: .valueChanged)
         amountTextField.addTarget(self, action: #selector(textFieldValueChanged), for: .editingChanged)
-
-        // Configure notesTextView placeholder behavior
+        
         notesTextView.text = "Enter any additional instructions or comments here."
         notesTextView.textColor = .lightGray
         notesTextView.delegate = self
-
+        
         // Set the mode of the date pickers to "Time" only
         firstDoseTimePicker.datePickerMode = .time
         secondDoseTimePicker.datePickerMode = .time
-
+        
         // Initially hide the second dose picker
         secondDoseTimePicker.isHidden = true
+    }
+    
+    func showAlert(title: String, message: String) {
+        let alertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        let okAction = UIAlertAction(title: "OK", style: .default, handler: nil)
+        alertController.addAction(okAction)
+        present(alertController, animated: true, completion: nil)
+    }
+
+    @IBAction func saveButtonTapped(_ sender: UIBarButtonItem) {
+        guard
+            let medicineName = medicationNameTextField.text, !medicineName.isEmpty,
+            let hospitalName = hospitalNameTextField.text, !hospitalName.isEmpty,
+            let doctorName = doctorNameTextField.text, !doctorName.isEmpty,
+            let selectedType = selectedMedicineType,
+            let selectedFrequency = selectedFrequency,
+            let amountText = amountTextField.text, let dosageAmount = Int(amountText)
+        else {
+            showAlert(title: "Invalid Input", message: "Please fill in all required fields.")
+            return
+        }
+
+        // Use the selected start date (e.g., from the date picker)
+        let selectedStartDate = firstDoseTimePicker.date
+        let calendar = Calendar.current
+        let startOfDay = calendar.startOfDay(for: selectedStartDate)
+        
+        let firstDosage = Dosage(id: UUID(), time: firstDoseTimePicker.date)
+        let secondDosage = secondDoseTimePicker.isHidden ? nil : Dosage(id: UUID(), time: secondDoseTimePicker.date)
+        var dosageList = [firstDosage]
+        if let secondDosage = secondDosage {
+            dosageList.append(secondDosage)
+        }
+        
+        let newMedication = Medication(
+            id: UUID(),
+            userId: UUID(),
+            medicineName: medicineName,
+            hospitalName: hospitalName,
+            doctorName: doctorName,
+            type: selectedType,
+            dosage: dosageList,
+            notes: notesTextView.text ?? "",
+            frequency: selectedFrequency,
+            interval: selectedFrequency == .everyFewDays ? selectedInterval : nil,  // Only add interval if frequency is "Every Few Days"
+            startDate: startOfDay,
+            endDate: nil,
+            time: Date(),
+            tag: UUID(),
+            appointment: nil
+        )
+        
+        delegate?.didAddMedication(newMedication)
+        onMedicationAdded?(newMedication)
+        navigationController?.popViewController(animated: true)
     }
 
     // MARK: - Configuration Methods
@@ -71,18 +128,38 @@ class AddMedicationTableViewController: UITableViewController {
         frequencyButton.showsMenuAsPrimaryAction = true
     }
 
-    // MARK: - Selection Methods
     private func selectMedicineType(_ type: MedicineType) {
         selectedMedicineType = type
         medicineTypeButton.setTitle(type.rawValue, for: .normal)
     }
-
+    
     private func selectFrequency(_ frequency: DosageFrequency) {
         selectedFrequency = frequency
         frequencyButton.setTitle(frequency.rawValue, for: .normal)
+        
+        if frequency == .everyFewDays {
+            // Show interval picker if frequency is "Every Few Days"
+            showIntervalPicker()
+        }
     }
 
-    // MARK: - Stepper and TextField Actions
+    private func showIntervalPicker() {
+        let alertController = UIAlertController(title: "Select Interval", message: "Select how many days between doses", preferredStyle: .actionSheet)
+        
+        // Provide interval options
+        for i in 1...30 {
+            alertController.addAction(UIAlertAction(title: "\(i) Day(s)", style: .default, handler: { [weak self] _ in
+                self?.selectedInterval = i
+                self?.frequencyButton.setTitle("Every \(i) Days", for: .normal)
+            }))
+        }
+        
+        // Add a cancel button
+        alertController.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+        
+        present(alertController, animated: true, completion: nil)
+    }
+
     @objc func stepperValueChanged() {
         let stepperValue = Int(amountStepper.value)
         amountTextField.text = "\(stepperValue)"
@@ -95,35 +172,17 @@ class AddMedicationTableViewController: UITableViewController {
     }
 
     // MARK: - Time Picker Actions
-    // MARK: - Time Picker Actions
     @IBAction func firstDoseTimeChanged(_ sender: UIDatePicker) {
-        // Save the time to a property (for backend saving)
         let selectedFirstDoseTime = sender.date
-        // Optionally, you can format the time before saving it to the backend
         let formattedFirstDoseTime = formatTime(from: selectedFirstDoseTime)
-        
-        // Save this data to the backend, or use it as needed
-        // For example, use a model to store or pass this to a server.
-        
-        // Hide the second dose picker until the first dose is selected
         secondDoseTimePicker.isHidden = false
     }
 
     @IBAction func secondDoseTimeChanged(_ sender: UIDatePicker) {
-        // Save the time to a property (for backend saving)
         let selectedSecondDoseTime = sender.date
-        // Optionally, you can format the time before saving it to the backend
         let formattedSecondDoseTime = formatTime(from: selectedSecondDoseTime)
-        
-        // Save this data to the backend, or use it as needed
-        // For example, use a model to store or pass this to a server.
     }
 
-
-    // MARK: - Navigation
-   
-
-    // MARK: - Helper Methods
     private func formatTime(from date: Date) -> String {
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "hh:mm a"
@@ -131,8 +190,7 @@ class AddMedicationTableViewController: UITableViewController {
     }
 }
 
-// MARK: - UITextViewDelegate
-extension AddMedicationTableViewController: UITextViewDelegate {
+extension AddMedicationTableTableViewController: UITextViewDelegate {
     func textViewDidBeginEditing(_ textView: UITextView) {
         if textView.textColor == .lightGray {
             textView.text = ""

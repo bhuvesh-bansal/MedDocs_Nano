@@ -97,11 +97,12 @@ extension ReportDetailsViewController: UITableViewDataSource, UITableViewDelegat
 
         // Configure the cell
         cell.medicationNameLabel.text = medication.name
-        cell.medicationDosageLabel.text = "\(medication.dosage)"
-        cell.medicationTypeLabel.text = "\(medication.type)"
-        cell.medicationDateLabel.text = "\(medication.date)"
-        cell.medicationTimeLabel.text = "\(medication.time)"
-        cell.medicationImageView.image = UIImage(systemName: "pills.fill") // Example SF Symbol
+        cell.amountLabel.text = "\(medication.dosage)"
+        cell.medicineTypeLabel.text = "\(medication.type)"
+        cell.startDateLabel.text = "\(medication.date)"
+        cell.startTimeLabel.text = "\(medication.time)"
+//        cell.medicationImageView.image = UIImage(systemName: "pills.fill")  Example SF Symbol
+        
 
         return cell
     }
@@ -118,7 +119,7 @@ extension ReportDetailsViewController: UICollectionViewDataSource, UICollectionV
     }
 
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "ReportCell", for: indexPath) as! ReportCollectionViewCell
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "ReportCell", for: indexPath) as! ReportDetailCollectionViewCell
         let report = reports[indexPath.item]
 
         // Configure the cell

@@ -1,113 +1,107 @@
-//import Foundation
-//
-//// Generate a dummy user with associated data
-//func generateDummyData() {
-//    // Step 1: Create a profile for the user
-//    let profile = ProfileDataModel.sharedProfileData.addProfile(
-//     email: "jane.doe@example.com",
-//        firstName: "Jane",
-//        middleName: nil,
-//        lastName: "Doe",
-//        DOB: Date(timeIntervalSince1970: 631152000), // Jan 1, 1990
-//        phoneNumber: "+1234567890",
-//        sex: .female,
-//        bloodType: .aPositive,
-//        allergies: [.food, .environmental],
-//        address: "123 Main Street, Springfield, IL"
-//    )
-//    
-//    // Step 2: Register the user
-//    let user = UserDataModel.sharedUserData.registerUser(
-//        email: profile.email,
-//        password: "password123",
-//        profile: profile
-//    )
-//    
-//    // Step 3: Add medications for the user
-//    MedicationDataModel.sharedMedicationData.addMedication(
-//        userId: user.id,
-//        medicineName: "Paracetamol",
-//        dosage: 500,
-//        type: .tablet,
-//        notes: "Take after meals for fever",
-//        frequency: .everyDay,
-//        interval: nil,
-//        startDate: Date(),
-//        endDate: nil,
-//        time: Date()
-//    )
-//    
-//    MedicationDataModel.sharedMedicationData.addMedication(
-//        userId: user.id,
-//        medicineName: "Ibuprofen",
-//        dosage: 200,
-//        type: .capsule,
-//        notes: "Take for headache",
-//        frequency: .everyFewDays,
-//        interval: 3,
-//        startDate: Date(),
-//        endDate: nil,
-//        time: Date()
-//    )
-//    
-//    // Step 4: Add an appointment for the user
-//    AppointmentDataModel.sharedAppointmentData.addAppointment(
-//        userId: user.id,
-//        doctorName: "Dr. John Smith",
+import Foundation
+
+func initializeSampleData() {
+    // Sample Tags
+    let tag1 = TagDataModel.sharedTagData.addTag(
+        tagName: "Neck Pain",
+        hospital: [],
+        appointments: [],
+        notes: "Pain in the neck",
+        reports: []
+    )
+    let tag2 = TagDataModel.sharedTagData.addTag(
+        tagName: "Back Pain",
+        hospital: [],
+        appointments: [],
+        notes: "Back discomfort",
+        reports: []
+    )
+    
+    // Sample Hospitals
+    let hospital1 = HospitalDataModel.sharedHospitalData.addHospital(
+        hospitalName: "City Hospital",
+        tags: [tag1.id, tag2.id]
+    )
+    let hospital2 = HospitalDataModel.sharedHospitalData.addHospital(
+        hospitalName: "General Clinic",
+        tags: [tag1.id]
+    )
+    
+    // Sample User
+    let user = UserDataModel.sharedUserData.registerUser(
+        email: "john.doe@example.com",
+        password: "password123"
+    )
+    
+    // Sample Profile
+    let profile = UserDataModel.sharedUserData.addProfile(
+        userId: user.userId,
+        profileImage: nil,
+        email: "john.doe@example.com",
+        firstName: "John",
+        lastName: "Doe",
+        dob: Date(),
+        phoneNumber: "9876543210",
+        sex: .male,
+        bloodType: .oPositive,
+        allergies: [.food, .drug],
+        address: "1234 Elm St"
+    )
+    
+    // Sample Medication
+    let dosage1 = Dosage(id: UUID(), time: Date())
+    let medication1 = MedicationDataModel.sharedMedicationData.addMedication(
+        medicineName: "Paracetamol",
+        hospitalName: "City Hospital",
+        doctorName: "Dr. Smith",
+        type: .tablet,
+        dosage: [dosage1],
+        notes: "For Fever",
+        frequency: .everyDay,
+        interval: nil,
+        startDate: Date(),
+        endDate: nil,
+        time: Date(),
+        tag: tag1.id,
+        appointment: nil
+    )
+    
+    // Sample Appointment
+//    let appointment1 = AppointmentDataModel.sharedAppointmentData.addAppointment(
+//        doctorName: "Dr. Smith",
 //        hospitalName: "City Hospital",
-//        tag: "General Checkup",
-//        notes: "Annual health check-up",
+//        tag: tag1.id,
+//        medication: [medication1.id],
+//        notes: "Follow-up for neck pain",
 //        time: Date(),
 //        date: Date(),
 //        status: .pending
 //    )
-//    
-//    // Step 5: Add reports for the user
-//    ReportDataModel.sharedReportData.addReport(
-//        userId: user.id,
-//        imagePath: "/path/to/report1.pdf",
-//        time: Date(),
-//        date: Date()
-//    )
-//    
-//    ReportDataModel.sharedReportData.addReport(
-//        userId: user.id,
-//        imagePath: "/path/to/report2.jpg",
-//        time: Date(),
-//        date: Date()
-//    )
-//    
-//    // Step 6: Add prescriptions for the user
-//    let prescription1 = Prescription(
-//        id: UUID(),
-//        userId: user.id,
-//        imagePath: "/path/to/prescription1.jpg",
-//        time: Date(),
-//        date: Date()
-//    )
-//    
-//    let prescription2 = Prescription(
-//        id: UUID(),
-//        userId: user.id,
-//        imagePath: "/path/to/prescription2.jpg",
-//        time: Date(),
-//        date: Date()
-//    )
-//    
-//    // Step 7: Add a report object containing all relevant user data
-//    let report = tags(
-//        id: UUID(),
-//        userId: user.id,
-//        tagName: "Annual Health Summary",
-//        hospitalName: "City Hospital",
-//        appointment: ["General Checkup"],
-//        medication: ["Paracetamol", "Ibuprofen"],
-//        notes: "Comprehensive health summary report",
-//        prescriptions: [prescription1, prescription2],
-//        reports: ReportDataModel.sharedReportData.getReports(for: user.id)
-//    )
-//    
-//    print("Dummy data generated for user: \(user.profile.firstName) \(user.profile.lastName)")
-//}
-//
-//// Generate and print dummy data
+    
+    // Assign the tag to the user by modifying the user's tags directly
+    var userToUpdate = UserDataModel.sharedUserData.getAllUsers().first
+    userToUpdate?.tags.append(tag1.id)  // Now it is mutable because we make `userToUpdate` a var
+    
+    // Update the user in the data model after modifying tags
+    if let userToUpdate = userToUpdate {
+        UserDataModel.sharedUserData.editUser(
+            id: userToUpdate.userId,
+            email: nil,
+            password: nil,
+            profileDetails: profile
+        )
+    }
+    
+    // Sample Report
+    let report1 = ReportDataModel.sharedReportData.addReport(
+        path: "Report/neck_pain.pdf",
+        time: Date(),
+        date: Date(),
+        reportType: .pdf
+    )
+    
+    // Linking reports to the tag
+    TagDataModel.sharedTagData.editTag(tagId: tag1.id, reports: [report1.id])
+}
+
+

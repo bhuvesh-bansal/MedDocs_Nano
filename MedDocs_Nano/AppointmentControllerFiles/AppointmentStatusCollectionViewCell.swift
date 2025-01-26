@@ -2,7 +2,7 @@
 //  AppointmentNamesCollectionViewCell.swift
 //  MedDocs_Nano
 //
-//  Created by Bhuvesh Bansal on 20/01/25.
+//  Created by Vansh Sharma on 20/01/25
 //
 
 import UIKit

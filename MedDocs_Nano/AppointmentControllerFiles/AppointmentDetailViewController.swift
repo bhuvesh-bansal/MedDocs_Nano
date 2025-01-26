@@ -2,147 +2,111 @@
 //  AppointmentDetailViewController.swift
 //  MedDocs_Nano
 //
-//  Created by Bhuvesh Bansal on 20/01/25.
+//  Created by Vansh Sharma on 21/01/25.
 //
 
 import UIKit
 
-struct MedicationTwo {
-    let name: String
-    let dosage: String
-    let type: String
-    let date: String
-    let time: String
-}
-
-struct ReportTwo {
-    let imageUrl: String
-    let uploadDate: String
-}
-
 class AppointmentDetailViewController: UIViewController {
-
-    @IBOutlet weak var lastUpdatedDateLabel: UILabel!
+    
     @IBOutlet weak var doctorNameLabel: UILabel!
     @IBOutlet weak var notesLabel: UILabel!
-    @IBOutlet weak var medicationTableView: UITableView!
-    // identifier MedicationCell
-    @IBOutlet weak var tagNameLabel: UILabel!
-    @IBOutlet weak var reportsCollectionView: UICollectionView!
-    // identifier reportsCell
-
-    var medications: [MedicationTwo] = []
-    var reports: [ReportTwo] = []
-
+    @IBOutlet weak var hospitalLabel: UILabel!
+    @IBOutlet weak var scheduleLabel: UILabel!
+    @IBOutlet weak var visitedButton: UIButton!
+    @IBOutlet weak var skippedButton: UIButton!
+    
+    var appointment: Appointment? // Appointment data passed to this view controller
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Setup TableView
-        medicationTableView.dataSource = self
-        medicationTableView.delegate = self
-
-        // Setup CollectionView
-        reportsCollectionView.dataSource = self
-        reportsCollectionView.delegate = self
-
-        // Load Data
-        loadData()
+        
+        // Initially hide all UI elements until data is loaded
+        doctorNameLabel.isHidden = true
+        notesLabel.isHidden = true
+        hospitalLabel.isHidden = true
+        scheduleLabel.isHidden = true
+        visitedButton.isHidden = true
+        skippedButton.isHidden = true
     }
-
-    private func loadData() {
-        // Dummy data for medications
-        medications = [
-            MedicationTwo(name: "Paracetamol", dosage: "500 mg", type: "Tablet", date: "20/01/2025", time: "08:00 AM"),
-            MedicationTwo(name: "Ibuprofen", dosage: "200 mg", type: "Capsule", date: "18/01/2025", time: "09:00 PM"),
-            MedicationTwo(name: "Cetirizine", dosage: "10 mg", type: "Tablet", date: "15/01/2025", time: "07:30 AM"),
-            MedicationTwo(name: "Amoxicillin", dosage: "250 mg", type: "Syrup", date: "22/01/2025", time: "12:00 PM")
-        ]
-
-        // Dummy data for reports
-        reports = [
-            ReportTwo(imageUrl: "lab_report", uploadDate: "January 15, 2025"),
-            ReportTwo(imageUrl: "prescription", uploadDate: "January 10, 2025")
-        ]
-
-        // Update UI elements
-        lastUpdatedDateLabel.text = "Last Updated: \(getCurrentDate())"
-        doctorNameLabel.text = "Dr. John Smith"
-        notesLabel.text = "Follow-up consultation notes will appear here."
-        tagNameLabel.text = "General Check-up"
-
-        // Reload Data
-        medicationTableView.reloadData()
-        reportsCollectionView.reloadData()
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        // Update UI with appointment data
+        updateUI()
     }
+    
+    /// Updates the UI with appointment details and adjusts button visibility based on status
+    private func updateUI() {
+        guard let appointment = appointment else { return }
+        
+        // Unhide all UI elements after data is loaded
+        doctorNameLabel.isHidden = false
+        notesLabel.isHidden = false
+        hospitalLabel.isHidden = false
+        scheduleLabel.isHidden = false
 
-    private func getCurrentDate() -> String {
+        // Populate labels with appointment data
+        doctorNameLabel.text = appointment.doctorName.isEmpty ? "No Doctor Name" : appointment.doctorName
+        hospitalLabel.text = appointment.clinicName.isEmpty ? "No Clinic Name" : appointment.clinicName
+        notesLabel.text = appointment.notes.isEmpty ? "No Notes" : appointment.notes
+
+        // Format and display the date and time
         let dateFormatter = DateFormatter()
-        dateFormatter.dateStyle = .medium
-        dateFormatter.timeStyle = .short
-        return dateFormatter.string(from: Date())
-    }
-}
+        dateFormatter.dateFormat = "d MMM"
+        let dateString = dateFormatter.string(from: appointment.date)
 
-// MARK: - UITableViewDataSource and UITableViewDelegate
-extension AppointmentDetailViewController: UITableViewDataSource, UITableViewDelegate {
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return medications.count
-    }
+        dateFormatter.dateFormat = "h:mm a"
+        let timeString = dateFormatter.string(from: appointment.time)
 
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: "MedicationCell", for: indexPath) as? MedicationDetailTableViewCell else {
-            return UITableViewCell()
+        scheduleLabel.text = "\(dateString) at \(timeString)"
+
+        // Adjust button visibility based on the appointment status
+        switch appointment.status {
+        case .pending:
+            visitedButton.isHidden = false
+            skippedButton.isHidden = false
+        case .skipped:
+            visitedButton.isHidden = false
+            skippedButton.isHidden = true
+        case .visited:
+            visitedButton.isHidden = true
+            skippedButton.isHidden = true
         }
-
-        let medication = medications[indexPath.row]
-
-        // Configure the cell
-        cell.medicationNameLabel.text = medication.name
-        cell.medicationDosageLabel.text = "\(medication.dosage)"
-        cell.medicationTypeLabel.text = "\(medication.type)"
-        cell.medicationDateLabel.text = "\(medication.date)"
-        cell.medicationTimeLabel.text = "\(medication.time)"
-        cell.medicationImageView.image = UIImage(systemName: "pills.fill") // Example SF Symbol
-
-        return cell
     }
-
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        print("Selected medication: \(medications[indexPath.row].name)")
-    }
-}
-
-// MARK: - UICollectionViewDataSource and UICollectionViewDelegateFlowLayout
-extension AppointmentDetailViewController: UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return reports.count
-    }
-
-    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "reportsCell", for: indexPath) as? ReportCollectionViewCell else {
-            return UICollectionViewCell() // Return a default cell if dequeuing fails
+    
+    /// Action when "Skipped" button is tapped
+    @IBAction func skippedCalled(_ sender: UIButton) {
+        if let appointment = appointment {
+            // Update appointment status to skipped
+            AppointmentDataModel.sharedAppointmentData.editAppointment(
+                clinicName: appointment.clinicName,
+                notes: appointment.notes,
+                time: appointment.time,
+                date: appointment.date,
+                status: .skipped
+            )
+            // Update local appointment object and refresh UI
+            self.appointment?.status = .skipped
+            updateUI()
         }
-
-        let report = reports[indexPath.item]
-
-        // Safely load the image
-        if let image = UIImage(named: report.imageUrl) {
-            cell.imageView.image = image
-        } else {
-            // Fallback to a placeholder image if not found
-            cell.imageView.image = UIImage(systemName: "doc.text") // Placeholder SF Symbol
-            print("Image not found for report: \(report.imageUrl)")
-        }
-
-        // Configure the cell
-        cell.uploadDate.text = report.uploadDate
-
-        return cell
     }
-
-
-
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: 100, height: 150)
+    
+    /// Action when "Visited" button is tapped
+    @IBAction func visitedCalled(_ sender: UIButton) {
+        if let appointment = appointment {
+            // Update appointment status to visited
+            AppointmentDataModel.sharedAppointmentData.editAppointment(
+                clinicName: appointment.clinicName,
+                notes: appointment.notes,
+                time: appointment.time,
+                date: appointment.date,
+                status: .visited
+            )
+            // Update local appointment object and refresh UI
+            self.appointment?.status = .visited
+            updateUI()
+        }
     }
 }

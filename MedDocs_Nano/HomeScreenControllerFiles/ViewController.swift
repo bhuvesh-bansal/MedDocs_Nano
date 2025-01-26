@@ -1,44 +1,45 @@
+//
+//  ViewController.swift
+//  HomeScreen_MedDocs
+//
+//  Created by Vansh Sharma on 20/01/25.
+//
+
 import UIKit
 
-// Define the AppointmentFive struct
-struct AppointmentFive {
-    var hospitalName: String
-    var notes: String
-    var date: Date
-    var status: String
-}
-
-// Define the MedicationFive struct with an optional typeImage
-struct MedicationFive {
-    var typeImage: String?  // Optional typeImage, allowing it to be nil
-    var medicineName: String
-    var dosage: String
-    var type: String
-    var dateTime: String
-}
-
-class MainViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
+class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
+
     @IBOutlet weak var username: UILabel!
     @IBOutlet weak var AppointmentTable: UITableView!
     @IBOutlet weak var MedicationTable: UITableView!
-    // Dummy data for Medications
-    let medications: [MedicationFive] = [
-        MedicationFive(typeImage: "pill", medicineName: "Paracetamol", dosage: "500mg", type: "Tablet", dateTime: "20 Jan 2025, 9:00 AM"),
-        MedicationFive(typeImage: "waterbottle.fill", medicineName: "Torex", dosage: "10ml", type: "Liquid", dateTime: "27 Jan 2025, 9:30 AM")
+    
+   
+
+            // Add some dummy data for testing
+
+    
+    // Sample data for Appointments
+//    let appointments = [
+//        ["hospitalLabel": "Hospital A", "hospitalName": "Neelam Hospital", "detail": "Shoulder ligament tear", "dateTime": "22Jan2025 10:00AM"],
+//        ["hospitalLabel": "Hospital B", "hospitalName": "City Hospital", "detail": "High blood pressure", "dateTime": "25Jan2025 2:00PM"]
+//    ]
+    
+    
+            
+    
+    // Sample data for Medications
+    let medications = [
+        ["typeImage": "pill", "medicineName": "Paracetamol", "dosage": "500mg", "type": "Tablet", "dateTime": "20 Jan 2025, 9:00 AM"],
+        ["typeImage": "waterbottle.fill", "medicineName": "Torex", "dosage": "10ml", "type": "Liquid", "dateTime": "27Jan2025 9:30AM"]
     ]
     
-    // Dummy data for Appointments
-    var appointments: [AppointmentFive] = []
-
+    var appointments = AppointmentDataModel.sharedAppointmentData.getAppointments()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-//        generateDummyData()
-        // Example UUID usage - Use a valid user UUID instead of UUID()
-        appointments = [
-            AppointmentFive(hospitalName: "City Hospital", notes: "Routine checkup", date: Date().addingTimeInterval(86400), status: "Pending"),
-            AppointmentFive(hospitalName: "General Clinic", notes: "Annual health check-up", date: Date().addingTimeInterval(172800), status: "Visited")
-        ]
+        
+        appointments = AppointmentDataModel.sharedAppointmentData.getAppointments()
         
         AppointmentTable.delegate = self
         AppointmentTable.dataSource = self
@@ -49,11 +50,13 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        
-        // Reverse the appointments order and reload data
-        self.appointments = appointments.reversed()
+        // Reload your appointments data
+        self.appointments = AppointmentDataModel.sharedAppointmentData.getAppointments().reversed()
         self.AppointmentTable.reloadData()
     }
+
+    
+    
     
     func numberOfSections(in tableView: UITableView) -> Int {
         return 1
@@ -61,7 +64,15 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if tableView == AppointmentTable {
-            return appointments.count
+            
+            if(appointments.count <= 2) {
+                return appointments.count
+            }
+            else{
+                 return 2;
+            }
+            
+                
         } else if tableView == MedicationTable {
             return medications.count
         }
@@ -74,25 +85,28 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
             let appointment = appointments[indexPath.row]
             
             // Extract first initials for the HospitalLabel
-            let hospitalName = appointment.hospitalName
-            cell.HospitalLabel.text = hospitalName.split(separator: " ").compactMap { $0.first }.map { String($0) }.joined()
+            let hospitalName = appointment.clinicName
             
-            cell.HospitalName.text = appointment.hospitalName
-            cell.Detail.text = appointment.notes
+                cell.HospitalLabel.text = hospitalName.split(separator: " ").compactMap { $0.first }.map { String($0) }.joined()
+            
+            
+            cell.HospitalName.text = appointment.clinicName
+            cell.Detail.text = appointment.doctorName
 
             let appointmentDate = appointment.date // Access the date from your appointment
+            
+            let appointmentTime = appointment.time
 
             // Create a DateFormatter instance
             let dateFormatter = DateFormatter()
 
             // Format for "21 Jan"
             dateFormatter.dateFormat = "d MMM" // Day and abbreviated month
-            
             let dateString = dateFormatter.string(from: appointmentDate)
 
             // Format for time (e.g., "10:30 AM")
             dateFormatter.dateFormat = "h:mm a" // Hour, minutes, and AM/PM
-            let timeString = dateFormatter.string(from: appointmentDate)
+            let timeString = dateFormatter.string(from: appointmentTime)
 
             // Combine date and time (optional)
             let dateTimeString = "\(dateString) at \(timeString)"
@@ -106,14 +120,14 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
             let medication = medications[indexPath.row]
             
             // Set SF Symbol image for TypeImage
-            if let typeImage = medication.typeImage {
+            if let typeImage = medication["typeImage"] {
                 cell.TypeImage.image = UIImage(systemName: typeImage)  // Use SF Symbols
             }
             
-            cell.MedicineName.text = medication.medicineName
-            cell.Dosage.text = medication.dosage
-            cell.Type.text = medication.type
-            cell.MedicineDateTime.text = medication.dateTime
+            cell.MedicineName.text = medication["medicineName"]
+            cell.Dosage.text = medication["dosage"]
+            cell.Type.text = medication["type"]
+            cell.MedicineDateTime.text = medication["dateTime"]
             return cell
         }
         return UITableViewCell()

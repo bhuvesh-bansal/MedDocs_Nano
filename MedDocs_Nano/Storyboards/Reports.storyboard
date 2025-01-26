@@ -27,7 +27,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Rsw-Ze-Yto" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2320" y="-2"/>
+            <point key="canvasLocation" x="2576" y="25"/>
         </scene>
         <!--Reports-->
         <scene sceneID="s0d-6b-0kx">
@@ -86,7 +86,7 @@
                                                         </label>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="NH" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BQA-MD-sFe">
                                                             <rect key="frame" x="10" y="11" width="60" height="73"/>
-                                                            <color key="backgroundColor" red="0.3058823645" green="0.67450982329999998" blue="0.71764707569999997" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                                            <color key="backgroundColor" red="0.29962607512995848" green="0.67050702287740904" blue="0.71764707569999997" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="width" constant="60" id="3nS-Sp-IEl"/>
                                                                 <constraint firstAttribute="height" constant="60" id="8is-HJ-iGH"/>
@@ -232,7 +232,6 @@
                                                     <outlet property="tagDateLabel" destination="vLr-1m-40N" id="3lk-PI-66r"/>
                                                     <outlet property="tagImageView" destination="bRM-r2-eie" id="DeG-b3-JRa"/>
                                                     <outlet property="tagNameLabel" destination="Cjw-sn-7fH" id="WSV-Dm-Eco"/>
-                                                    <segue destination="p38-69-0OL" kind="show" id="QWs-TC-Q30"/>
                                                 </connections>
                                             </tableViewCell>
                                         </prototypes>
@@ -271,12 +270,17 @@
                             <constraint firstItem="vDu-zF-Fre" firstAttribute="bottom" secondItem="irE-NT-bq8" secondAttribute="bottom" id="gAF-mw-T5D"/>
                             <constraint firstItem="S4a-yd-cKz" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" id="xj0-40-KQk"/>
                         </constraints>
+                        <variation key="default">
+                            <mask key="subviews">
+                                <exclude reference="irE-NT-bq8"/>
+                            </mask>
+                        </variation>
                     </view>
                     <toolbarItems/>
                     <navigationItem key="navigationItem" title="Reports" largeTitleDisplayMode="always" id="NqW-fO-X06">
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="c5F-OB-dlF">
                             <connections>
-                                <segue destination="oPw-Re-p6c" kind="presentation" id="d6M-12-9zS"/>
+                                <segue destination="joL-JN-FKC" kind="show" id="kmJ-xT-3FQ"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -293,7 +297,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ief-a0-LHa" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3069" y="556"/>
+            <point key="canvasLocation" x="3479" y="25"/>
         </scene>
         <!--Hospital Name-->
         <scene sceneID="lSm-c7-a2N">
@@ -496,28 +500,17 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="nNq-3v-FrP" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4304.580152671756" y="24.647887323943664"/>
+            <point key="canvasLocation" x="4502" y="50"/>
         </scene>
         <!--Add Reports-->
         <scene sceneID="faT-nn-TsI">
             <objects>
                 <viewController id="2tW-Y9-v0R" customClass="AddReportsViewController" customModule="MedDocs_Nano" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="DLu-fy-kyj">
-                        <rect key="frame" x="0.0" y="0.0" width="393" height="842"/>
+                        <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="GMW-nH-emu">
-                                <rect key="frame" x="0.0" y="56" width="393" height="786"/>
-                            </scrollView>
-                        </subviews>
                         <viewLayoutGuide key="safeArea" id="phL-5Z-CTM"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                        <constraints>
-                            <constraint firstAttribute="bottom" secondItem="GMW-nH-emu" secondAttribute="bottom" id="GSI-9n-aFv"/>
-                            <constraint firstItem="GMW-nH-emu" firstAttribute="trailing" secondItem="phL-5Z-CTM" secondAttribute="trailing" id="bLg-bD-Sn1"/>
-                            <constraint firstItem="GMW-nH-emu" firstAttribute="leading" secondItem="phL-5Z-CTM" secondAttribute="leading" id="nyb-nj-cqH"/>
-                            <constraint firstItem="GMW-nH-emu" firstAttribute="top" secondItem="phL-5Z-CTM" secondAttribute="top" id="vTK-o9-Tg2"/>
-                        </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Add Reports" id="Cfj-ZX-Dcj">
                         <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="xJd-AH-lDd"/>
@@ -526,7 +519,17 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="sMA-Ia-6En" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3513.740458015267" y="-727.46478873239437"/>
+            <point key="canvasLocation" x="3479" y="-727"/>
+        </scene>
+        <!--AddReports-->
+        <scene sceneID="8JF-J1-d2e">
+            <objects>
+                <viewControllerPlaceholder storyboardName="AddReports" id="joL-JN-FKC" sceneMemberID="viewController">
+                    <navigationItem key="navigationItem" id="p3G-8w-f1b"/>
+                </viewControllerPlaceholder>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="FNw-Lu-W5h" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3960" y="-386"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="Ma1-HN-yjm">
@@ -534,7 +537,7 @@
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="oPw-Re-p6c" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="wAF-81-fFm">
-                        <rect key="frame" x="0.0" y="0.0" width="393" height="56"/>
+                        <rect key="frame" x="0.0" y="59" width="393" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <nil name="viewControllers"/>
@@ -547,9 +550,6 @@
             <point key="canvasLocation" x="2320" y="-727"/>
         </scene>
     </scenes>
-    <inferredMetricsTieBreakers>
-        <segue reference="OZO-2m-mmb"/>
-    </inferredMetricsTieBreakers>
     <resources>
         <image name="filemenu.and.cursorarrow" catalog="system" width="128" height="108"/>
         <image name="folder" catalog="system" width="128" height="96"/>

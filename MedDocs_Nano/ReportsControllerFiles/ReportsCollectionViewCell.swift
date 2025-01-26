@@ -7,7 +7,7 @@
 
 import UIKit
 
-class ReportCollectionViewCell: UICollectionViewCell {
+class ReportDetailCollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var imageView: UIImageView!
     @IBOutlet weak var uploadDate: UILabel!
     

@@ -27,12 +27,12 @@
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="vud-xL-kzp" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-302" y="-20"/>
+            <point key="canvasLocation" x="-450" y="-20"/>
         </scene>
         <!--addAppointment-->
         <scene sceneID="gsE-Mj-nBQ">
             <objects>
-                <viewControllerPlaceholder storyboardName="VAppointment" referencedIdentifier="addAppointment" id="meG-eE-GwD" sceneMemberID="viewController">
+                <viewControllerPlaceholder storyboardName="Appointment" referencedIdentifier="addAppointment" id="meG-eE-GwD" sceneMemberID="viewController">
                     <navigationItem key="navigationItem" id="H5p-Cn-IUO"/>
                 </viewControllerPlaceholder>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="YZz-53-95G" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -77,7 +77,7 @@
                 </viewControllerPlaceholder>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="rLe-Aw-Vfl" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="209" y="-75"/>
+            <point key="canvasLocation" x="78" y="-75"/>
         </scene>
         <!--Reports-->
         <scene sceneID="VjB-cy-kyr">
@@ -87,12 +87,12 @@
                 </viewControllerPlaceholder>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="V4a-oB-SOH" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="215" y="31"/>
+            <point key="canvasLocation" x="84" y="31"/>
         </scene>
-        <!--Main View Controller-->
+        <!--View Controller-->
         <scene sceneID="agm-hS-OMi">
             <objects>
-                <viewController id="Kno-1R-rAX" customClass="MainViewController" customModule="MedDocs_Nano" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="Kno-1R-rAX" customClass="ViewController" customModule="MedDocs_Nano" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Ofa-q9-REY">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -287,7 +287,7 @@
                                 <rect key="frame" x="0.0" y="417" width="393" height="352"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="9b2-fw-1c2">
-                                        <rect key="frame" x="0.0" y="0.0" width="393" height="700"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="393" height="1200"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Your Appointments" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" sizingRule="oversize" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7Dk-rQ-acs">
                                                 <rect key="frame" x="16" y="16" width="181.33333333333334" height="24"/>
@@ -306,17 +306,17 @@
                                                 </connections>
                                             </button>
                                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="141" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="KEN-t5-XU7">
-                                                <rect key="frame" x="16" y="55" width="361" height="300"/>
+                                                <rect key="frame" x="16" y="55" width="361" height="200"/>
                                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                 <constraints>
-                                                    <constraint firstAttribute="height" constant="300" id="5Nd-VX-z8g"/>
+                                                    <constraint firstAttribute="height" constant="200" id="5Nd-VX-z8g"/>
                                                 </constraints>
                                                 <prototypes>
-                                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" accessoryType="disclosureIndicator" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="Appointment" rowHeight="114" id="20B-aU-yte" customClass="AppointmentTableViewCell" customModule="MedDocs_Nano" customModuleProvider="target">
+                                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="Appointment" rowHeight="114" id="20B-aU-yte" customClass="AppointmentTableViewCell" customModule="MedDocs_Nano" customModuleProvider="target">
                                                         <rect key="frame" x="0.0" y="50" width="361" height="114"/>
                                                         <autoresizingMask key="autoresizingMask"/>
                                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="20B-aU-yte" id="raP-WH-KH3">
-                                                            <rect key="frame" x="0.0" y="0.0" width="330.66666666666669" height="114"/>
+                                                            <rect key="frame" x="0.0" y="0.0" width="361" height="114"/>
                                                             <autoresizingMask key="autoresizingMask"/>
                                                             <subviews>
                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="NH" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="g6Y-6O-GUA">
@@ -372,13 +372,13 @@
                                                 </prototypes>
                                             </tableView>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Your Medications" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" sizingRule="oversize" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wfE-Ar-Vp1">
-                                                <rect key="frame" x="16" y="371" width="163" height="34"/>
+                                                <rect key="frame" x="16" y="271" width="163" height="34"/>
                                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="O97-ai-F23">
-                                                <rect key="frame" x="303" y="371" width="74" height="34"/>
+                                                <rect key="frame" x="303" y="271" width="74" height="34"/>
                                                 <state key="normal" title="Button"/>
                                                 <buttonConfiguration key="configuration" style="plain" title="See All">
                                                     <fontDescription key="titleFontDescription" type="system" pointSize="16"/>
@@ -388,10 +388,10 @@
                                                 </connections>
                                             </button>
                                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="141" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="lon-Gs-2Jw" customClass="Medica">
-                                                <rect key="frame" x="16" y="415" width="361" height="300"/>
+                                                <rect key="frame" x="16" y="315" width="361" height="220"/>
                                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                 <constraints>
-                                                    <constraint firstAttribute="height" constant="300" id="SVy-6T-sg6"/>
+                                                    <constraint firstAttribute="height" constant="220" id="SVy-6T-sg6"/>
                                                 </constraints>
                                                 <prototypes>
                                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" accessoryType="disclosureIndicator" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="Medicine" rowHeight="114" id="5n6-4F-7LJ" customClass="MedicationTableViewCell" customModule="MedDocs_Nano" customModuleProvider="target">
@@ -466,7 +466,7 @@
                                             <constraint firstItem="O97-ai-F23" firstAttribute="top" secondItem="KEN-t5-XU7" secondAttribute="bottom" constant="16" id="Ocq-9V-F6d"/>
                                             <constraint firstItem="lon-Gs-2Jw" firstAttribute="top" secondItem="O97-ai-F23" secondAttribute="bottom" constant="10" id="TLs-20-RkK"/>
                                             <constraint firstItem="06z-YA-Sqw" firstAttribute="centerY" secondItem="7Dk-rQ-acs" secondAttribute="centerY" id="YU7-1f-cMk"/>
-                                            <constraint firstAttribute="height" constant="700" id="bCw-F3-5PW"/>
+                                            <constraint firstAttribute="height" constant="1200" id="bCw-F3-5PW"/>
                                             <constraint firstItem="lon-Gs-2Jw" firstAttribute="leading" secondItem="9b2-fw-1c2" secondAttribute="leading" constant="16" id="fBL-Tz-H9R"/>
                                             <constraint firstItem="wfE-Ar-Vp1" firstAttribute="leading" secondItem="9b2-fw-1c2" secondAttribute="leading" constant="16" id="omA-h3-iHq"/>
                                             <constraint firstAttribute="trailing" secondItem="lon-Gs-2Jw" secondAttribute="trailing" constant="16" id="rLF-ca-hER"/>
@@ -511,7 +511,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Pqb-g6-gDL" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1471" y="-20"/>
+            <point key="canvasLocation" x="1467.9389312977098" y="-20.422535211267608"/>
         </scene>
         <!--Home-->
         <scene sceneID="AZW-xX-bFO">
@@ -530,7 +530,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="CtI-HB-vDm" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="628" y="-20"/>
+            <point key="canvasLocation" x="541.22137404580155" y="-20.422535211267608"/>
         </scene>
     </scenes>
     <resources>
@@ -542,7 +542,7 @@
         <image name="person.fill" catalog="system" width="128" height="120"/>
         <image name="pill.fill" catalog="system" width="128" height="123"/>
         <systemColor name="separatorColor">
-            <color red="0.23529411759999999" green="0.23529411759999999" blue="0.26274509800000001" alpha="0.28999999999999998" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.23529411764705882" green="0.23529411764705882" blue="0.2627450980392157" alpha="0.28999999999999998" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>

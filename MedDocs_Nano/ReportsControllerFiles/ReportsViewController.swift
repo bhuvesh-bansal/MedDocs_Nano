@@ -1,27 +1,8 @@
-//  ReportsViewController.swift
-//  MedDocs
-//
-//  Created by Bhuvesh Bansal on 15/01/25.
-//
-
 import UIKit
-
-struct Hospital {
-    let name: String
-    let imageText: String
-    let date: String
-}
-
-struct Tag {
-    let imageName: String
-    let name: String
-    let date: String
-}
 
 class ReportsViewController: UIViewController {
 
     // MARK: Outlets
-    
     @IBOutlet weak var searchBar: UISearchBar!
     @IBOutlet weak var segmentedButton: UISegmentedControl!
     @IBOutlet weak var hospitalView: UIView!
@@ -30,32 +11,23 @@ class ReportsViewController: UIViewController {
     @IBOutlet weak var tagTableView: UITableView!
     @IBOutlet weak var tagView: UIView!
 
-    
     // MARK: Properties
-    var hospitals: [Hospital] = [
-        Hospital(name: "City Hospital", imageText: "🏥", date: "17 Jan 2025"),
-        Hospital(name: "General Clinic", imageText: "🏥", date: "10 Feb 2023"),
-        Hospital(name: "Apollo Hospital", imageText: "🏥", date: "15 Mar 2023")
-    ]
+    var hospitals: [Tag] = [] // Tags containing hospital-related data
+    var tags: [Tag] = []      // All tags
 
-    var tags: [Tag] = [
-        Tag(imageName: "tagIcon", name: "Neck Pain", date: "12 Feb 2023"),
-        Tag(imageName: "tagIcon", name: "Back Pain", date: "10 Jan 2024"),
-        Tag(imageName: "tagIcon", name: "Knee Pain", date: "15 Mar 2022"),
-        Tag(imageName: "tagIcon", name: "Shoulder Pain", date: "25 Dec 2023"),
-        Tag(imageName: "tagIcon", name: "Wrist Pain", date: "08 Nov 2021")
-    ]
-
-    var filteredHospitals: [Hospital] = []
+    var filteredHospitals: [Tag] = []
     var filteredTags: [Tag] = []
     var selectedTag: String = "All"
     var selectedIndex: IndexPath?
 
+    // MARK: Default Values
+    let defaultSelectedTag = "All"  // Default tag is "All"
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         configureUI()
-        sortTagsByDate()
-        filterTags(by: "All")
+        loadData()
+        filterTags(by: defaultSelectedTag)
         filteredHospitals = hospitals
         filteredTags = tags
         searchBar.delegate = self
@@ -64,6 +36,38 @@ class ReportsViewController: UIViewController {
         selectedIndex = IndexPath(item: 0, section: 0)
         tagSortCollectionView.reloadData()
     }
+
+    // MARK: Data Loading
+    func loadData() {
+        // Load tags and hospitals from a shared data model
+        let tagDataModel = TagDataModel.sharedTagData
+        
+        // Retrieve all tags from the model
+        tags = tagDataModel.getAllTags()
+
+        // Ensure that the tags array is not empty
+        if tags.isEmpty {
+            print("No tags available.")
+        }
+        
+        // Load the hospitals using the UUIDs stored in the tags
+        hospitals = tags.compactMap { tag in
+            // You can filter and load actual Hospital objects by matching UUIDs
+            // For this example, we'll assume you have a way to fetch a hospital by UUID
+            let relatedHospitals = tag.hospital.compactMap { hospitalUUID in
+                return HospitalDataModel.sharedHospitalData.getHospital(by: hospitalUUID)
+            }
+            
+            // If any hospitals exist for the tag, include this tag as part of the filtered results
+            return relatedHospitals.isEmpty ? nil : tag
+        }
+        
+        // Ensure hospitals are available after filtering
+        if hospitals.isEmpty {
+            print("No hospitals associated with tags.")
+        }
+    }
+
 
 
     // MARK: UI Configuration
@@ -100,18 +104,6 @@ class ReportsViewController: UIViewController {
         tagTableView.delegate = self
     }
 
-    // MARK: Sorting
-    func sortTagsByDate() {
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "dd MMM yyyy"
-
-        tags.sort { tag1, tag2 in
-            guard let date1 = dateFormatter.date(from: tag1.date),
-                  let date2 = dateFormatter.date(from: tag2.date) else { return false }
-            return date1 > date2
-        }
-    }
-
     // MARK: Segmented Button Action
     @IBAction func segmentedButtonChanged(_ sender: UISegmentedControl) {
         let showHospital = sender.selectedSegmentIndex == 1
@@ -123,20 +115,20 @@ class ReportsViewController: UIViewController {
 
     // MARK: Filtering
     func filterTags(by tagName: String) {
-        if tagName == "All" {
+        if tagName == defaultSelectedTag {
             filteredTags = tags
         } else {
-            filteredTags = tags.filter { $0.name == tagName }
+            filteredTags = tags.filter { $0.tagName == tagName }
         }
         tagTableView.reloadData()
     }
 
     func filterContent(for query: String) {
         if segmentedButton.selectedSegmentIndex == 1 {
-            filteredHospitals = query.isEmpty ? hospitals : hospitals.filter { $0.name.lowercased().contains(query.lowercased()) }
+            filteredHospitals = query.isEmpty ? hospitals : hospitals.filter { $0.tagName.lowercased().contains(query.lowercased()) }
             hospitalTableView.reloadData()
         } else {
-            filteredTags = query.isEmpty ? tags : tags.filter { $0.name.lowercased().contains(query.lowercased()) }
+            filteredTags = query.isEmpty ? tags : tags.filter { $0.tagName.lowercased().contains(query.lowercased()) }
             tagTableView.reloadData()
         }
     }
@@ -163,18 +155,16 @@ extension ReportsViewController: UITableViewDataSource, UITableViewDelegate {
         if tableView == hospitalTableView {
             let cell = tableView.dequeueReusableCell(withIdentifier: "hospitalNamesTableViewCell", for: indexPath) as! HospitalNamesTableViewCell
             let hospital = filteredHospitals[indexPath.row]
-            let words = hospital.name.split(separator: " ")
-            let firstLetters = words.prefix(2).compactMap { $0.first }.map { String($0) }.joined()
 
-            cell.hospitalNameImageLabel.text = firstLetters
-            cell.hospitalNameLabel.text = hospital.name
-            cell.hospitalDate.text = "Last updated on " + hospital.date
+            cell.hospitalNameImageLabel.text = hospital.tagName.first?.uppercased() ?? ""
+            cell.hospitalNameLabel.text = hospital.tagName
+            cell.hospitalDate.text = "Last updated on \(hospital.notes ?? "N/A")"
             return cell
         } else {
             let cell = tableView.dequeueReusableCell(withIdentifier: "tagsDetailTableViewCell", for: indexPath) as! tagsDetailTableViewCell
             let tag = filteredTags[indexPath.row]
-            cell.tagNameLabel.text = tag.name
-            cell.tagDateLabel.text = "Last updated on " + tag.date
+            cell.tagNameLabel.text = tag.tagName
+            cell.tagDateLabel.text = "Last updated on \(tag.notes ?? "N/A")"
             return cell
         }
     }
@@ -193,7 +183,7 @@ extension ReportsViewController: UICollectionViewDelegate, UICollectionViewDataS
             cell.tagNameLabel.text = "All"
         } else {
             let tag = tags[indexPath.item - 1]
-            cell.tagNameLabel.text = tag.name
+            cell.tagNameLabel.text = tag.tagName
         }
 
         let isSelected = selectedIndex == indexPath
@@ -208,12 +198,12 @@ extension ReportsViewController: UICollectionViewDelegate, UICollectionViewDataS
 
         collectionView.reloadItems(at: [previousIndex, indexPath].compactMap { $0 })
 
-        selectedTag = indexPath.item == 0 ? "All" : tags[indexPath.item - 1].name
+        selectedTag = indexPath.item == 0 ? defaultSelectedTag : tags[indexPath.item - 1].tagName
         filterTags(by: selectedTag)
     }
 
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        let tagName = indexPath.item == 0 ? "All" : tags[indexPath.item - 1].name
+        let tagName = indexPath.item == 0 ? defaultSelectedTag : tags[indexPath.item - 1].tagName
         let textWidth = tagName.size(withAttributes: [.font: UIFont.systemFont(ofSize: 17)]).width
         return CGSize(width: textWidth + 20, height: 30) // Add padding
     }

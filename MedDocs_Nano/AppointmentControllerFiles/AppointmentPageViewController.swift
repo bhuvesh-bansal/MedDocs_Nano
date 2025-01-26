@@ -2,7 +2,7 @@
 //  AppointmentPageViewController.swift
 //  MedDocs_Nano
 //
-//  Created by Bhuvesh Bansal on 20/01/25.
+//  Created by Vansh Sharma on 19/01/25.
 //
 
 import UIKit
@@ -14,16 +14,19 @@ class AppointmentPageViewController: UIViewController {
     @IBOutlet weak var appointmentDetailTableView: UITableView!
 
     // Sample data for appointments
-    var appointments: [(name: String, doctor: String, date: String, status: AppointmentStatus)] = [
-        ("Dental Checkup", "Dr. Smith", "20/01/2025", .pending),
-        ("Eye Checkup", "Dr. Johnson", "18/01/2025", .visited),
-        ("Physiotherapy", "Dr. Brown", "15/01/2025", .skipped),
-        ("Skin Consultation", "Dr. Davis", "22/01/2025", .pending)
-    ]
+//    var appointments: [(name: String, doctor: String, date: String, status: AppointmentStatus)] = [
+//        ("Dental Checkup", "Dr. Smith", "20/01/2025", .pending),
+//        ("Eye Checkup", "Dr. Johnson", "18/01/2025", .visited),
+//        ("Physiotherapy", "Dr. Brown", "15/01/2025", .skipped),
+//        ("Skin Consultation", "Dr. Davis", "22/01/2025", .pending)
+//    ]
+    
+    var appointments = AppointmentDataModel.sharedAppointmentData.getAppointments()
 
     // Filtered appointments for table view
-    var filteredAppointments: [(name: String, doctor: String, date: String, status: AppointmentStatus)] = []
-
+    var filteredAppointments: [Appointment] = []
+    
+    
     // Variable to track the selected index
     var selectedCollectionIndex: Int = 0
 
@@ -31,7 +34,7 @@ class AppointmentPageViewController: UIViewController {
         super.viewDidLoad()
 
         // Initialize filtered appointments with all appointments
-        filteredAppointments = appointments
+        filteredAppointments = appointments.reversed()
 
         // Set delegates and data sources
         appointmentDetailTableView.delegate = self
@@ -40,7 +43,17 @@ class AppointmentPageViewController: UIViewController {
         appointmentSortCollectionView.dataSource = self
         searchBar.delegate = self
     }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        // Reload your appointments data
+        self.appointments = AppointmentDataModel.sharedAppointmentData.getAppointments().reversed()
+        self.appointmentDetailTableView.reloadData()
+    }
+
+    
 }
+
 
 // MARK: - TableView DataSource and Delegate
 extension AppointmentPageViewController: UITableViewDelegate, UITableViewDataSource {
@@ -51,14 +64,14 @@ extension AppointmentPageViewController: UITableViewDelegate, UITableViewDataSou
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "AppointmentMainPageNamesTableViewCell", for: indexPath) as! AppointmentDetailTableViewCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: "AppointmentMainPageNamesTableViewCell", for: indexPath) as! AppointmentMainPageNamesTableViewCell
         let appointment = filteredAppointments[indexPath.row]
 
         // Debugging logs
-        print("Appointment for row \(indexPath.row): \(appointment.name), \(appointment.doctor), \(appointment.date), \(appointment.status.rawValue)")
+//        print("Appointment for row \(indexPath.row): \(appointment.name), \(appointment.doctor), \(appointment.date), \(appointment.status.rawValue)")
 
         // Skip "Dr." and get the first two letters of the doctor's name
-        let doctorName = appointment.doctor.replacingOccurrences(of: "Dr. ", with: "", options: .caseInsensitive)
+        let doctorName = appointment.doctorName.replacingOccurrences(of: "Dr ", with: "", options: .caseInsensitive)
         let firstTwoLetters = String(doctorName.prefix(2)).uppercased()
 
         if firstTwoLetters.isEmpty {
@@ -67,8 +80,26 @@ extension AppointmentPageViewController: UITableViewDelegate, UITableViewDataSou
             cell.appointmentNameImageTextLabel.text = firstTwoLetters
         }
 
-        cell.appointmentNameLabel.text = appointment.doctor
-        cell.appointmentDateLabel.text = appointment.date
+        cell.appointmentNameLabel.text = appointment.doctorName
+        
+        let dateFormatter = DateFormatter()
+        let appointmentDate = appointment.date
+        
+        let appointmentTime = appointment.time
+        
+        // Format for "21 Jan"
+        dateFormatter.dateFormat = "d MMM" // Day and abbreviated month
+        let dateString = dateFormatter.string(from: appointmentDate)
+
+        // Format for time (e.g., "10:30 AM")
+        dateFormatter.dateFormat = "h:mm a" // Hour, minutes, and AM/PM
+        let timeString = dateFormatter.string(from: appointmentTime)
+
+        // Combine date and time (optional)
+        let dateTimeString = "\(dateString) at \(timeString)"
+        
+        cell.appointmentDateLabel.text = dateTimeString
+        
         cell.appointmentStatusLabel.text = appointment.status.rawValue
 
         // Set the color of the status label based on the appointment status
@@ -83,12 +114,26 @@ extension AppointmentPageViewController: UITableViewDelegate, UITableViewDataSou
 
         return cell
     }
-
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        performSegue(withIdentifier: "appointmentDetailSegue", sender: indexPath)
+    }
 
 
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 80
     }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any? ) {
+        if segue.identifier == "appointmentDetailSegue" {
+            if let destinationVC = segue.destination as? AppointmentDetailViewController,
+               let indexPath = sender as? IndexPath {
+                let appointment = filteredAppointments[indexPath.row]
+                destinationVC.appointment = appointment
+            }
+        }
+    }
+
 }
 
 // MARK: - CollectionView DataSource and Delegate
@@ -168,12 +213,12 @@ extension AppointmentPageViewController: UISearchBarDelegate {
         if !cleanSearchText.isEmpty {
             searchResults = appointments.filter { appointment in
                 // Remove "Dr." prefix from the doctor's name, if it exists
-                let cleanDoctorName = appointment.doctor.replacingOccurrences(of: "dr.", with: "", options: .caseInsensitive).lowercased()
+                let cleanDoctorName = appointment.doctorName.replacingOccurrences(of: "dr.", with: "", options: .caseInsensitive).lowercased()
 
                 let containsSearchText = cleanDoctorName.contains(cleanSearchText)
 
                 // Debugging log for filtering each appointment by doctor's name
-                print("Checking appointment with doctor: \(appointment.doctor), contains search text: \(containsSearchText)")
+//                print("Checking appointment with doctor: \(appointment.doctor), contains search text: \(containsSearchText)")
 
                 return containsSearchText
             }
